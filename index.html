@@ -342,11 +342,12 @@
           <label for="snippet">Code to paste</label>
           <textarea id="snippet" readonly></textarea>
         </div>
-      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-        <button class="btn" id="copyBtn" type="button">Copy</button>
-        <span class="toast" id="toast">Copied</span>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <button class="btn" id="copyBtn" type="button">Copy</button>
+          <button class="btn" id="copyImgBtn" type="button">Copy badge image</button>
+          <span class="toast" id="toast">Copied</span>
+        </div>
       </div>
-    </div>
 
     <div class="card" style="margin-bottom:18px;">
       <h3>How to add to Outlook (Windows desktop)</h3>
@@ -383,6 +384,7 @@
   const snippet = document.getElementById("snippet");
   const toast = document.getElementById("toast");
   const copyBtn = document.getElementById("copyBtn");
+  const copyImgBtn = document.getElementById("copyImgBtn");
 
   badges.forEach(b => {
     const opt = document.createElement("option");
@@ -449,6 +451,25 @@
       setTimeout(() => toast.classList.remove("show"), 1500);
     } catch (err) {
       toast.textContent = "Copy failed";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    }
+  });
+
+  copyImgBtn.addEventListener("click", async () => {
+    const slug = badgeSelect.value;
+    const label = badges.find(b => b.slug === slug)?.label ?? "AI badge";
+    const pngUrl = withV(`badges/png/2x/${slug}.png`);
+    try {
+      const res = await fetch(pngUrl);
+      const blob = await res.blob();
+      const item = new ClipboardItem({ [blob.type]: blob });
+      await navigator.clipboard.write([item]);
+      toast.textContent = "Badge image copied";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1500);
+    } catch (err) {
+      toast.textContent = "Image copy not available in this browser";
       toast.classList.add("show");
       setTimeout(() => toast.classList.remove("show"), 2000);
     }
