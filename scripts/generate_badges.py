@@ -193,29 +193,19 @@ def write_png(svg_path: Path, width: int, height: int, label: str, scale_label: 
     draw.polygon(star_points((6 * scale, height / 2), 3.0 * scale, 1.25 * scale), fill=(253, 247, 255, 255))
 
     # Text
-    # Font sizes proportional to target height for consistent legibility
-    ai_font_px = max(12, int(height * 0.55))
-    body_font_px = max(12, int(height * 0.52))
+    # Font sizes tuned for crisp PNG export at 1x/2x; SVGs are primary source of truth.
+    ai_font_px = max(14, int(height * 0.70))
+    body_font_px = max(14, int(height * 0.68))
 
     font = load_font("DejaVuSans-Bold.ttf", ai_font_px)
 
     ai_text = "AI"
     ai_w, ai_h = measure(ai_text, font)
-    draw.text(
-        ((left_px - ai_w) / 2, (height - ai_h) / 2),
-        ai_text,
-        font=font,
-        fill=(255, 255, 255, 255),
-    )
+    draw.text(((left_px - ai_w) / 2, (height - ai_h) / 2), ai_text, font=font, fill=(255, 255, 255, 255))
 
     font_body = load_font("DejaVuSans-Bold.ttf", body_font_px, fallback=font)
     _, text_h = measure(label, font_body)
-    draw.text(
-        (left_px + pad_px, (height - text_h) / 2),
-        label,
-        font=font_body,
-        fill=(255, 255, 255, 255),
-    )
+    draw.text((left_px + pad_px, (height - text_h) / 2), label, font=font_body, fill=(255, 255, 255, 255))
 
     img.save(png_path)
     return png_path
