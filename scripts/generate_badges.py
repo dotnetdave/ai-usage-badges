@@ -189,7 +189,11 @@ def write_png(svg_path: Path, width: int, height: int, label: str, scale_label: 
     draw.polygon(star_points((6 * scale, height / 2), 3.0 * scale, 1.25 * scale), fill=(253, 247, 255, 255))
 
     # Text
-    font = load_font("DejaVuSans-Bold.ttf", int(15 * scale_factor))
+    # Font sizes proportional to target height for consistent legibility
+    ai_font_px = max(12, int(height * 0.55))
+    body_font_px = max(12, int(height * 0.52))
+
+    font = load_font("DejaVuSans-Bold.ttf", ai_font_px)
 
     ai_text = "AI"
     ai_w, ai_h = measure(ai_text, font)
@@ -200,7 +204,7 @@ def write_png(svg_path: Path, width: int, height: int, label: str, scale_label: 
         fill=(255, 255, 255, 255),
     )
 
-    font_body = load_font("DejaVuSans-Bold.ttf", int(15 * scale_factor), fallback=font)
+    font_body = load_font("DejaVuSans-Bold.ttf", body_font_px, fallback=font)
     _, text_h = measure(label, font_body)
     draw.text(
         (left_px + pad_px, (height - text_h) / 2),
