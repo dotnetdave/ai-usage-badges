@@ -125,10 +125,25 @@
       padding: 10px 12px;
       border-radius: 8px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.06);
       color: #e2e8f0;
       font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
     }
+    select {
+      appearance: none;
+      background-image: linear-gradient(135deg, #7B5CF9 0%, #E549FF 100%);
+      color: #0b0b15;
+      font-weight: 700;
+      border: none;
+      padding-right: 42px;
+      position: relative;
+    }
+    select option {
+      color: #0b0b15;
+      background: #eef2ff;
+      font-weight: 600;
+    }
+    select:focus { outline: 2px solid #c084fc; outline-offset: 2px; }
     textarea { min-height: 120px; resize: vertical; }
     .btn {
       display: inline-flex;
