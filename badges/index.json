@@ -1,0 +1,49 @@
+{
+  "badges": [
+    {
+      "label": "Human Original",
+      "slug": "human-original",
+      "path": "badges/svg/human-original.svg"
+    },
+    {
+      "label": "Human Original \u2022 AI Polished",
+      "slug": "human-original-ai-polished",
+      "path": "badges/svg/human-original-ai-polished.svg"
+    },
+    {
+      "label": "AI Drafted",
+      "slug": "ai-drafted",
+      "path": "badges/svg/ai-drafted.svg"
+    },
+    {
+      "label": "AI Drafted \u2022 Human Edited",
+      "slug": "ai-drafted-human-edited",
+      "path": "badges/svg/ai-drafted-human-edited.svg"
+    },
+    {
+      "label": "Human\u2013AI Co-Created",
+      "slug": "human-ai-co-created",
+      "path": "badges/svg/human-ai-co-created.svg"
+    },
+    {
+      "label": "AI Suggested \u2022 Human Approved",
+      "slug": "ai-suggested-human-approved",
+      "path": "badges/svg/ai-suggested-human-approved.svg"
+    },
+    {
+      "label": "Human Written \u2022 AI Reviewed",
+      "slug": "human-written-ai-reviewed",
+      "path": "badges/svg/human-written-ai-reviewed.svg"
+    },
+    {
+      "label": "AI Generated",
+      "slug": "ai-generated",
+      "path": "badges/svg/ai-generated.svg"
+    },
+    {
+      "label": "Human Curated",
+      "slug": "human-curated",
+      "path": "badges/svg/human-curated.svg"
+    }
+  ]
+}

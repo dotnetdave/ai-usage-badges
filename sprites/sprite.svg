@@ -1,0 +1,209 @@
+<svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true'>
+  <symbol id='human-original' viewBox='0 0 162 20'>
+
+  <title>Human Original</title>
+  <defs>
+    <linearGradient id='grad-ai-human-original' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#7B5CF9'/>
+      <stop offset='100%' stop-color='#E549FF'/>
+    </linearGradient>
+  </defs>
+  <g shape-rendering='crispEdges'>
+    <rect rx='3' width='162' height='20' fill='#111827'/>
+    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-original)'/>
+  </g>
+  <g fill='none' stroke='rgba(255,255,255,0.08)'>
+    <path d='M 44 1.5 V 18.5'/>
+  </g>
+  <g>
+    <path d='M9 2l1.1 3.4L13.5 6 10.1 7.6 9 11 7.9 7.6 4.5 6 7.9 5.4 9 2z' fill='#FDF7FF' transform='translate(8 5) scale(0.6)'/>
+    <text x='26.0' y='14' text-anchor='middle' fill='#FFFFFF' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='600'>AI</text>
+    <text x='54' y='14' fill='#E5E7EB' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='500'>Human Original</text>
+  </g>
+
+  </symbol>
+  <symbol id='human-original-ai-polished' viewBox='0 0 260 20'>
+
+  <title>Human Original • AI Polished</title>
+  <defs>
+    <linearGradient id='grad-ai-human-original-ai-polished' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#7B5CF9'/>
+      <stop offset='100%' stop-color='#E549FF'/>
+    </linearGradient>
+  </defs>
+  <g shape-rendering='crispEdges'>
+    <rect rx='3' width='260' height='20' fill='#111827'/>
+    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-original-ai-polished)'/>
+  </g>
+  <g fill='none' stroke='rgba(255,255,255,0.08)'>
+    <path d='M 44 1.5 V 18.5'/>
+  </g>
+  <g>
+    <path d='M9 2l1.1 3.4L13.5 6 10.1 7.6 9 11 7.9 7.6 4.5 6 7.9 5.4 9 2z' fill='#FDF7FF' transform='translate(8 5) scale(0.6)'/>
+    <text x='26.0' y='14' text-anchor='middle' fill='#FFFFFF' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='600'>AI</text>
+    <text x='54' y='14' fill='#E5E7EB' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='500'>Human Original • AI Polished</text>
+  </g>
+
+  </symbol>
+  <symbol id='ai-drafted' viewBox='0 0 134 20'>
+
+  <title>AI Drafted</title>
+  <defs>
+    <linearGradient id='grad-ai-ai-drafted' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#7B5CF9'/>
+      <stop offset='100%' stop-color='#E549FF'/>
+    </linearGradient>
+  </defs>
+  <g shape-rendering='crispEdges'>
+    <rect rx='3' width='134' height='20' fill='#111827'/>
+    <rect rx='3' width='44' height='20' fill='url(#grad-ai-ai-drafted)'/>
+  </g>
+  <g fill='none' stroke='rgba(255,255,255,0.08)'>
+    <path d='M 44 1.5 V 18.5'/>
+  </g>
+  <g>
+    <path d='M9 2l1.1 3.4L13.5 6 10.1 7.6 9 11 7.9 7.6 4.5 6 7.9 5.4 9 2z' fill='#FDF7FF' transform='translate(8 5) scale(0.6)'/>
+    <text x='26.0' y='14' text-anchor='middle' fill='#FFFFFF' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='600'>AI</text>
+    <text x='54' y='14' fill='#E5E7EB' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='500'>AI Drafted</text>
+  </g>
+
+  </symbol>
+  <symbol id='ai-drafted-human-edited' viewBox='0 0 239 20'>
+
+  <title>AI Drafted • Human Edited</title>
+  <defs>
+    <linearGradient id='grad-ai-ai-drafted-human-edited' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#7B5CF9'/>
+      <stop offset='100%' stop-color='#E549FF'/>
+    </linearGradient>
+  </defs>
+  <g shape-rendering='crispEdges'>
+    <rect rx='3' width='239' height='20' fill='#111827'/>
+    <rect rx='3' width='44' height='20' fill='url(#grad-ai-ai-drafted-human-edited)'/>
+  </g>
+  <g fill='none' stroke='rgba(255,255,255,0.08)'>
+    <path d='M 44 1.5 V 18.5'/>
+  </g>
+  <g>
+    <path d='M9 2l1.1 3.4L13.5 6 10.1 7.6 9 11 7.9 7.6 4.5 6 7.9 5.4 9 2z' fill='#FDF7FF' transform='translate(8 5) scale(0.6)'/>
+    <text x='26.0' y='14' text-anchor='middle' fill='#FFFFFF' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='600'>AI</text>
+    <text x='54' y='14' fill='#E5E7EB' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='500'>AI Drafted • Human Edited</text>
+  </g>
+
+  </symbol>
+  <symbol id='human-ai-co-created' viewBox='0 0 197 20'>
+
+  <title>Human–AI Co-Created</title>
+  <defs>
+    <linearGradient id='grad-ai-human-ai-co-created' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#7B5CF9'/>
+      <stop offset='100%' stop-color='#E549FF'/>
+    </linearGradient>
+  </defs>
+  <g shape-rendering='crispEdges'>
+    <rect rx='3' width='197' height='20' fill='#111827'/>
+    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-ai-co-created)'/>
+  </g>
+  <g fill='none' stroke='rgba(255,255,255,0.08)'>
+    <path d='M 44 1.5 V 18.5'/>
+  </g>
+  <g>
+    <path d='M9 2l1.1 3.4L13.5 6 10.1 7.6 9 11 7.9 7.6 4.5 6 7.9 5.4 9 2z' fill='#FDF7FF' transform='translate(8 5) scale(0.6)'/>
+    <text x='26.0' y='14' text-anchor='middle' fill='#FFFFFF' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='600'>AI</text>
+    <text x='54' y='14' fill='#E5E7EB' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='500'>Human–AI Co-Created</text>
+  </g>
+
+  </symbol>
+  <symbol id='ai-suggested-human-approved' viewBox='0 0 267 20'>
+
+  <title>AI Suggested • Human Approved</title>
+  <defs>
+    <linearGradient id='grad-ai-ai-suggested-human-approved' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#7B5CF9'/>
+      <stop offset='100%' stop-color='#E549FF'/>
+    </linearGradient>
+  </defs>
+  <g shape-rendering='crispEdges'>
+    <rect rx='3' width='267' height='20' fill='#111827'/>
+    <rect rx='3' width='44' height='20' fill='url(#grad-ai-ai-suggested-human-approved)'/>
+  </g>
+  <g fill='none' stroke='rgba(255,255,255,0.08)'>
+    <path d='M 44 1.5 V 18.5'/>
+  </g>
+  <g>
+    <path d='M9 2l1.1 3.4L13.5 6 10.1 7.6 9 11 7.9 7.6 4.5 6 7.9 5.4 9 2z' fill='#FDF7FF' transform='translate(8 5) scale(0.6)'/>
+    <text x='26.0' y='14' text-anchor='middle' fill='#FFFFFF' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='600'>AI</text>
+    <text x='54' y='14' fill='#E5E7EB' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='500'>AI Suggested • Human Approved</text>
+  </g>
+
+  </symbol>
+  <symbol id='human-written-ai-reviewed' viewBox='0 0 253 20'>
+
+  <title>Human Written • AI Reviewed</title>
+  <defs>
+    <linearGradient id='grad-ai-human-written-ai-reviewed' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#7B5CF9'/>
+      <stop offset='100%' stop-color='#E549FF'/>
+    </linearGradient>
+  </defs>
+  <g shape-rendering='crispEdges'>
+    <rect rx='3' width='253' height='20' fill='#111827'/>
+    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-written-ai-reviewed)'/>
+  </g>
+  <g fill='none' stroke='rgba(255,255,255,0.08)'>
+    <path d='M 44 1.5 V 18.5'/>
+  </g>
+  <g>
+    <path d='M9 2l1.1 3.4L13.5 6 10.1 7.6 9 11 7.9 7.6 4.5 6 7.9 5.4 9 2z' fill='#FDF7FF' transform='translate(8 5) scale(0.6)'/>
+    <text x='26.0' y='14' text-anchor='middle' fill='#FFFFFF' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='600'>AI</text>
+    <text x='54' y='14' fill='#E5E7EB' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='500'>Human Written • AI Reviewed</text>
+  </g>
+
+  </symbol>
+  <symbol id='ai-generated' viewBox='0 0 148 20'>
+
+  <title>AI Generated</title>
+  <defs>
+    <linearGradient id='grad-ai-ai-generated' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#7B5CF9'/>
+      <stop offset='100%' stop-color='#E549FF'/>
+    </linearGradient>
+  </defs>
+  <g shape-rendering='crispEdges'>
+    <rect rx='3' width='148' height='20' fill='#111827'/>
+    <rect rx='3' width='44' height='20' fill='url(#grad-ai-ai-generated)'/>
+  </g>
+  <g fill='none' stroke='rgba(255,255,255,0.08)'>
+    <path d='M 44 1.5 V 18.5'/>
+  </g>
+  <g>
+    <path d='M9 2l1.1 3.4L13.5 6 10.1 7.6 9 11 7.9 7.6 4.5 6 7.9 5.4 9 2z' fill='#FDF7FF' transform='translate(8 5) scale(0.6)'/>
+    <text x='26.0' y='14' text-anchor='middle' fill='#FFFFFF' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='600'>AI</text>
+    <text x='54' y='14' fill='#E5E7EB' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='500'>AI Generated</text>
+  </g>
+
+  </symbol>
+  <symbol id='human-curated' viewBox='0 0 155 20'>
+
+  <title>Human Curated</title>
+  <defs>
+    <linearGradient id='grad-ai-human-curated' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#7B5CF9'/>
+      <stop offset='100%' stop-color='#E549FF'/>
+    </linearGradient>
+  </defs>
+  <g shape-rendering='crispEdges'>
+    <rect rx='3' width='155' height='20' fill='#111827'/>
+    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-curated)'/>
+  </g>
+  <g fill='none' stroke='rgba(255,255,255,0.08)'>
+    <path d='M 44 1.5 V 18.5'/>
+  </g>
+  <g>
+    <path d='M9 2l1.1 3.4L13.5 6 10.1 7.6 9 11 7.9 7.6 4.5 6 7.9 5.4 9 2z' fill='#FDF7FF' transform='translate(8 5) scale(0.6)'/>
+    <text x='26.0' y='14' text-anchor='middle' fill='#FFFFFF' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='600'>AI</text>
+    <text x='54' y='14' fill='#E5E7EB' font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size='11' font-weight='500'>Human Curated</text>
+  </g>
+
+  </symbol>
+</svg>
