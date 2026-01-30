@@ -11,8 +11,8 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-human-original)' shape-rendering='crispEdges'>
-    <rect rx='5' width='162' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
-    <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-original)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='162' height='20' fill='#111827' />
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-original)' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
