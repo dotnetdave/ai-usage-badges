@@ -342,11 +342,22 @@
           <label for="snippet">Code to paste</label>
           <textarea id="snippet" readonly></textarea>
         </div>
-        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-          <button class="btn" id="copyBtn" type="button">Copy</button>
-          <span class="toast" id="toast">Copied</span>
-        </div>
+      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        <button class="btn" id="copyBtn" type="button">Copy</button>
+        <span class="toast" id="toast">Copied</span>
       </div>
+    </div>
+
+    <div class="card" style="margin-bottom:18px;">
+      <h3>How to add to Outlook (Windows desktop)</h3>
+      <ol style="margin: 8px 0 0 18px; padding: 0; line-height: 1.5; color: var(--muted);">
+        <li>Pick the badge and format above, choose “Email footer (SVG)”, then click Copy.</li>
+        <li>In Outlook: File → Options → Mail → Signatures → Edit your signature.</li>
+        <li>Place the cursor where you want the badge, choose Insert Picture, and paste the copied HTML (Ctrl+V).</li>
+        <li>If Outlook strips HTML, paste into the signature editor’s HTML view (or Insert &gt; Picture from Clipboard).</li>
+        <li>Click OK to save. Send yourself a test email to verify the badge renders and the alt text reads correctly when images are blocked.</li>
+      </ol>
+    </div>
 
       <!-- Additional examples removed to keep the embed section focused on the picker -->
     </section>
