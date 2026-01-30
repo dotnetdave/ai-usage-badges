@@ -1,4 +1,4 @@
-# AI Usage Badges
+# AI Attribution Badges
 
 A small, standardized badge set for disclosing how AI was used in content creation. Badges describe the **process** (who/what contributed), not ownership or accountability.
 
