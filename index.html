@@ -97,6 +97,7 @@
     .badge-row img {
       display: block;
       height: 20px;
+      max-width: 100%;
     }
     .badge-title {
       font-weight: 600;
@@ -115,6 +116,15 @@
     @media (max-width: 640px) {
       header { padding: 20px; }
       header h1 { font-size: 26px; }
+      .grid { grid-template-columns: 1fr; }
+      .badge-row { align-items: flex-start; text-align: left; }
+      .badge-row img { height: 24px; }
+      pre { font-size: 13px; }
+    }
+    @media (max-width: 420px) {
+      body { padding: 0; }
+      .shell { padding: 28px 14px 56px; }
+      pre { white-space: pre-wrap; word-break: break-word; }
     }
   </style>
 </head>
