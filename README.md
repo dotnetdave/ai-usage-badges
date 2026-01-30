@@ -2,16 +2,16 @@
 
 A small, standardized badge set for disclosing how AI was used in content creation. Badges describe the **process** (who/what contributed), not ownership or accountability.
 
-## Badge Categories
+## Badge Categories (ordered by increasing AI involvement)
 - Human Original
 - Human Original • AI Polished
-- AI Drafted
-- AI Drafted • Human Edited
-- Human–AI Co-Created
-- AI Suggested • Human Approved
 - Human Written • AI Reviewed
-- AI Generated
+- AI Suggested • Human Approved
 - Human Curated
+- Human–AI Co-Created
+- AI Drafted • Human Edited
+- AI Drafted
+- AI Generated
 
 ## Design System
 - Shields.io–style pill shape with rounded corners.

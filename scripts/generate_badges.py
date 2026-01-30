@@ -22,13 +22,13 @@ SPRITE_PATH = ROOT / "sprites" / "sprite.svg"
 BADGES: List[str] = [
     "Human Original",
     "Human Original • AI Polished",
-    "AI Drafted",
-    "AI Drafted • Human Edited",
-    "Human–AI Co-Created",
-    "AI Suggested • Human Approved",
     "Human Written • AI Reviewed",
-    "AI Generated",
+    "AI Suggested • Human Approved",
     "Human Curated",
+    "Human–AI Co-Created",
+    "AI Drafted • Human Edited",
+    "AI Drafted",
+    "AI Generated",
 ]
 
 LEFT_WIDTH = 44
