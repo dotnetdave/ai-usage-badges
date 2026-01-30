@@ -20,12 +20,12 @@ A small, standardized badge set for disclosing how AI was used in content creati
 - Typeface: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif fallback.
 - Default size: 20px tall; scalable without loss (vector).
 
-## Usage Guidelines
-- One badge per artifact (post, PR, dataset, deck, etc.).
-- Be honest about the highest level of AI involvement used in the artifact's creation.
-- If unsure, default to **Human–AI Co-Created**.
-- Place badges where attribution lives: README, blog header, slide title, footer, or asset metadata.
-- For versioned repos, keep the badge with the artifact (e.g., in `/docs` or `/assets`).
+## Usage Guidelines (office & comms first)
+- Use one badge per artifact: emails, reports, slide decks, one-pagers, FAQs, customer replies.
+- Pick the badge that reflects the **highest** AI involvement; if unsure, default to **Human–AI Co-Created**.
+- Place it where people look first: email signature/footer, slide title or footer, document cover, FAQ header.
+- Keep it with the file so it travels (e.g., in a shared drive folder or the PDF footer).
+- For customer-facing comms, include alt text (e.g., “AI Drafted • Human Edited”) for accessibility and when images are blocked.
 
 ## Assets
 Generated assets live under `badges/`:
