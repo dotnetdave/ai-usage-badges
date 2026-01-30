@@ -460,6 +460,18 @@
     const slug = badgeSelect.value;
     const label = badges.find(b => b.slug === slug)?.label ?? "AI badge";
     const pngUrl = withV(`badges/png/2x/${slug}.png`);
+    const fallbackOpen = () => {
+      window.open(pngUrl, "_blank", "noopener");
+      toast.textContent = "Clipboard blocked; opened image to copy manually";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    };
+
+    if (!isSecureContext || typeof ClipboardItem === "undefined" || !navigator.clipboard?.write) {
+      fallbackOpen();
+      return;
+    }
+
     try {
       const res = await fetch(pngUrl);
       const blob = await res.blob();
@@ -469,9 +481,7 @@
       toast.classList.add("show");
       setTimeout(() => toast.classList.remove("show"), 1500);
     } catch (err) {
-      toast.textContent = "Image copy not available in this browser";
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 2000);
+      fallbackOpen();
     }
   });
 
