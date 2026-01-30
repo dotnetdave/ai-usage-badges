@@ -113,6 +113,57 @@
       font-size: 22px;
       letter-spacing: -0.2px;
     }
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 12px 0;
+    }
+    label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
+    select, textarea, input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: #e2e8f0;
+      font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: var(--accent);
+      color: #0b0b15;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(124, 92, 249, 0.35);
+      transition: transform 0.08s ease, box-shadow 0.12s ease;
+    }
+    .btn:active { transform: translateY(1px); box-shadow: 0 6px 18px rgba(124, 92, 249, 0.25); }
+    .preview {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+    }
+    .toast {
+      font-size: 13px;
+      color: #86efac;
+      margin-left: 12px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .toast.show { opacity: 1; }
     @media (max-width: 640px) {
       header { padding: 20px; }
       header h1 { font-size: 26px; }
@@ -244,6 +295,42 @@
     <section>
       <h2 class="section-title">Embed</h2>
       <p class="muted">Replace <code>your-domain.tld</code> with your deployed root (e.g., GitHub Pages custom domain).</p>
+
+      <div class="card" style="margin-bottom:18px;">
+        <h3>Badge Picker &amp; Copy Helper</h3>
+        <div class="form-row">
+          <div>
+            <label for="badgeSelect">Badge</label>
+            <select id="badgeSelect"></select>
+          </div>
+          <div>
+            <label for="formatSelect">Format</label>
+            <select id="formatSelect">
+              <option value="svg-md">Markdown (SVG)</option>
+              <option value="svg-html">HTML IMG (SVG)</option>
+              <option value="png1-html">HTML IMG (PNG 1x)</option>
+              <option value="png2-html">HTML IMG (PNG 2x)</option>
+              <option value="email">Email footer (PNG 2x)</option>
+              <option value="sprite">SVG Sprite &lt;use&gt;</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin: 12px 0;">
+          <label>Preview</label>
+          <div class="preview">
+            <img id="badgePreview" src="" alt="Badge preview" height="24">
+          </div>
+        </div>
+        <div style="margin: 12px 0;">
+          <label for="snippet">Code to paste</label>
+          <textarea id="snippet" readonly></textarea>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <button class="btn" id="copyBtn" type="button">Copy</button>
+          <span class="toast" id="toast">Copied</span>
+        </div>
+      </div>
+
       <div class="card" style="margin-bottom:16px;">
         <h3>Email (signature or footer)</h3>
         <p class="muted">Use the PNG version for reliable rendering in Outlook/Gmail. Set an explicit height.</p>
@@ -276,4 +363,96 @@
     </section>
   </div>
 </body>
+<script>
+  const badges = [
+    { slug: "human-original", label: "Human Original" },
+    { slug: "human-original-ai-polished", label: "Human Original • AI Polished" },
+    { slug: "human-written-ai-reviewed", label: "Human Written • AI Reviewed" },
+    { slug: "ai-suggested-human-approved", label: "AI Suggested • Human Approved" },
+    { slug: "human-curated", label: "Human Curated" },
+    { slug: "human-ai-co-created", label: "Human–AI Co-Created" },
+    { slug: "ai-drafted-human-edited", label: "AI Drafted • Human Edited" },
+    { slug: "ai-drafted", label: "AI Drafted" },
+    { slug: "ai-generated", label: "AI Generated" },
+  ];
+
+  const badgeSelect = document.getElementById("badgeSelect");
+  const formatSelect = document.getElementById("formatSelect");
+  const preview = document.getElementById("badgePreview");
+  const snippet = document.getElementById("snippet");
+  const toast = document.getElementById("toast");
+  const copyBtn = document.getElementById("copyBtn");
+
+  badges.forEach(b => {
+    const opt = document.createElement("option");
+    opt.value = b.slug;
+    opt.textContent = b.label;
+    badgeSelect.appendChild(opt);
+  });
+
+  function abs(path) {
+    return new URL(path, window.location.href).href;
+  }
+
+  function buildSnippet(slug, label, fmt) {
+    const svgUrl = abs(`badges/svg/${slug}.svg`);
+    const png1 = abs(`badges/png/1x/${slug}.png`);
+    const png2 = abs(`badges/png/2x/${slug}.png`);
+    const sprite = abs(`sprites/sprite.svg#${slug}`);
+
+    switch (fmt) {
+      case "svg-md":
+        return `![${label}](${svgUrl})`;
+      case "svg-html":
+        return `<img src="${svgUrl}" alt="${label}" height="20">`;
+      case "png1-html":
+        return `<img src="${png1}" alt="${label}" height="20">`;
+      case "png2-html":
+        return `<img src="${png2}" alt="${label}" height="40">`;
+      case "email":
+        return `<div style="font-family:'Segoe UI',Arial,sans-serif;font-size:13px;line-height:18px;">
+  <strong>AI Disclosure:</strong><br>
+  <img src="${png2}" alt="${label}" height="40" style="vertical-align:middle;border:none;">
+</div>`;
+      case "sprite":
+        return `<svg role="img" aria-label="${label}" height="20">
+  <use href="${sprite}" />
+</svg>`;
+      default:
+        return "";
+    }
+  }
+
+  function updateUI() {
+    const slug = badgeSelect.value;
+    const fmt = formatSelect.value;
+    const label = badges.find(b => b.slug === slug)?.label ?? "";
+
+    // Preview prefers SVG for crispness
+    preview.src = abs(`badges/svg/${slug}.svg`);
+    preview.alt = label;
+
+    snippet.value = buildSnippet(slug, label, fmt);
+  }
+
+  badgeSelect.addEventListener("change", updateUI);
+  formatSelect.addEventListener("change", updateUI);
+
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(snippet.value);
+      toast.textContent = "Copied";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1500);
+    } catch (err) {
+      toast.textContent = "Copy failed";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    }
+  });
+
+  // Initialize defaults
+  badgeSelect.value = badges[0].slug;
+  updateUI();
+</script>
 </html>
