@@ -42,8 +42,8 @@ RIGHT_FILL = "#111827"
 RIGHT_TEXT = "#E5E7EB"
 GRADIENT_START = "#7B5CF9"
 GRADIENT_END = "#E549FF"
-OUTLINE = None  # no outline to avoid fringe on transparent corners
-OUTLINE_RGBA = None
+OUTLINE = "#0D1222"
+OUTLINE_RGBA = (13, 18, 34, 255)
 
 
 def slugify(label: str) -> str:
@@ -87,8 +87,8 @@ def build_svg(label: str) -> str:
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-{slug})' shape-rendering='crispEdges'>
-    <rect rx='{RADIUS}' width='{total_width}' height='{HEIGHT}' fill='{RIGHT_FILL}' />
-    <rect rx='{RADIUS}' width='{LEFT_WIDTH}' height='{HEIGHT}' fill='url(#grad-ai-{slug})' />
+    <rect rx='{RADIUS}' width='{total_width}' height='{HEIGHT}' fill='{RIGHT_FILL}' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='{RADIUS}' width='{LEFT_WIDTH}' height='{HEIGHT}' fill='url(#grad-ai-{slug})' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M {LEFT_WIDTH} 1.5 V {HEIGHT - 1.5}'/>
@@ -156,7 +156,7 @@ def write_png(svg_path: Path, width: int, height: int, label: str, scale_label: 
     draw = ImageDraw.Draw(img)
 
     # Rounded background
-    draw.rounded_rectangle([(0, 0), (width - 1, height - 1)], radius=radius, fill=hex_to_rgb(RIGHT_FILL) + (255,))
+    draw.rounded_rectangle([(0, 0), (width - 1, height - 1)], radius=radius, fill=hex_to_rgb(RIGHT_FILL) + (255,), outline=OUTLINE_RGBA, width=1)
 
     # Gradient for left chip
     start_r, start_g, start_b = hex_to_rgb(GRADIENT_START)
@@ -179,7 +179,7 @@ def write_png(svg_path: Path, width: int, height: int, label: str, scale_label: 
     m_draw.pieslice([0, height - radius * 2, radius * 2, height], 90, 180, fill=255)
     img.paste(gradient, (0, 0), mask)
     # Outline on the gradient chip
-    draw.rounded_rectangle([(0, 0), (left_px - 1, height - 1)], radius=radius, outline=None)
+    draw.rounded_rectangle([(0, 0), (left_px - 1, height - 1)], radius=radius, outline=OUTLINE_RGBA, width=1)
 
     # Divider
     draw.line([(left_px, 1), (left_px, height - 2)], fill=(255, 255, 255, 20))
