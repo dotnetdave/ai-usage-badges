@@ -16,7 +16,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-human-original)' shape-rendering='crispEdges'>
-    <rect rx='5' width='162' height='20' fill='url(#grad-dark-human-original)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='162' height='20' fill='url(#grad-dark-human-original)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-original)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
@@ -46,7 +46,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-human-original-ai-polished)' shape-rendering='crispEdges'>
-    <rect rx='5' width='260' height='20' fill='url(#grad-dark-human-original-ai-polished)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='260' height='20' fill='url(#grad-dark-human-original-ai-polished)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-original-ai-polished)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
@@ -76,7 +76,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-human-written-ai-reviewed)' shape-rendering='crispEdges'>
-    <rect rx='5' width='253' height='20' fill='url(#grad-dark-human-written-ai-reviewed)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='253' height='20' fill='url(#grad-dark-human-written-ai-reviewed)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-written-ai-reviewed)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
@@ -106,7 +106,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-ai-suggested-human-approved)' shape-rendering='crispEdges'>
-    <rect rx='5' width='267' height='20' fill='url(#grad-dark-ai-suggested-human-approved)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='267' height='20' fill='url(#grad-dark-ai-suggested-human-approved)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-suggested-human-approved)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
@@ -136,7 +136,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-human-curated)' shape-rendering='crispEdges'>
-    <rect rx='5' width='155' height='20' fill='url(#grad-dark-human-curated)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='155' height='20' fill='url(#grad-dark-human-curated)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-curated)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
@@ -166,7 +166,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-human-ai-co-created)' shape-rendering='crispEdges'>
-    <rect rx='5' width='197' height='20' fill='url(#grad-dark-human-ai-co-created)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='197' height='20' fill='url(#grad-dark-human-ai-co-created)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-ai-co-created)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
@@ -196,7 +196,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-ai-drafted-human-edited)' shape-rendering='crispEdges'>
-    <rect rx='5' width='239' height='20' fill='url(#grad-dark-ai-drafted-human-edited)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='239' height='20' fill='url(#grad-dark-ai-drafted-human-edited)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-drafted-human-edited)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
@@ -226,7 +226,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-ai-drafted)' shape-rendering='crispEdges'>
-    <rect rx='5' width='134' height='20' fill='url(#grad-dark-ai-drafted)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='134' height='20' fill='url(#grad-dark-ai-drafted)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-drafted)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
@@ -256,7 +256,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-ai-generated)' shape-rendering='crispEdges'>
-    <rect rx='5' width='148' height='20' fill='url(#grad-dark-ai-generated)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='148' height='20' fill='url(#grad-dark-ai-generated)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-generated)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>

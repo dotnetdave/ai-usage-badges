@@ -15,7 +15,7 @@
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-human-written-ai-reviewed)' shape-rendering='crispEdges'>
-    <rect rx='5' width='253' height='20' fill='url(#grad-dark-human-written-ai-reviewed)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='253' height='20' fill='url(#grad-dark-human-written-ai-reviewed)' stroke='#1E2533' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-written-ai-reviewed)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>

@@ -42,6 +42,7 @@ RIGHT_FILL = "#111827"
 RIGHT_TEXT = "#E5E7EB"
 GRADIENT_START = "#7B5CF9"
 GRADIENT_END = "#E549FF"
+DARK_STROKE = "#1E2533"  # mid-gray outline for the dark section
 OUTLINE = "#0D1222"
 OUTLINE_RGBA = (13, 18, 34, 255)
 DARK_GRADIENT_START = "#0f1628"
@@ -93,7 +94,7 @@ def build_svg(label: str) -> str:
     </linearGradient>
   </defs>
   <g clip-path='url(#clip-{slug})' shape-rendering='crispEdges'>
-    <rect rx='{RADIUS}' width='{total_width}' height='{HEIGHT}' fill='url(#grad-dark-{slug})' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='{RADIUS}' width='{total_width}' height='{HEIGHT}' fill='url(#grad-dark-{slug})' stroke='{DARK_STROKE}' stroke-width='1' stroke-linejoin='round' />
     <rect rx='{RADIUS}' width='{LEFT_WIDTH}' height='{HEIGHT}' fill='url(#grad-ai-{slug})' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
