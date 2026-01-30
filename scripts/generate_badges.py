@@ -44,6 +44,8 @@ GRADIENT_START = "#7B5CF9"
 GRADIENT_END = "#E549FF"
 OUTLINE = "#0D1222"
 OUTLINE_RGBA = (13, 18, 34, 255)
+DARK_GRADIENT_START = "#0f1628"
+DARK_GRADIENT_END = "#0b1020"
 
 
 def slugify(label: str) -> str:
@@ -85,9 +87,13 @@ def build_svg(label: str) -> str:
       <stop offset='0%' stop-color='{GRADIENT_START}'/>
       <stop offset='100%' stop-color='{GRADIENT_END}'/>
     </linearGradient>
+    <linearGradient id='grad-dark-{slug}' x1='0%' y1='0%' x2='0%' y2='100%'>
+      <stop offset='0%' stop-color='{DARK_GRADIENT_START}'/>
+      <stop offset='100%' stop-color='{DARK_GRADIENT_END}'/>
+    </linearGradient>
   </defs>
   <g clip-path='url(#clip-{slug})' shape-rendering='crispEdges'>
-    <rect rx='{RADIUS}' width='{total_width}' height='{HEIGHT}' fill='{RIGHT_FILL}' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='{RADIUS}' width='{total_width}' height='{HEIGHT}' fill='url(#grad-dark-{slug})' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round' />
     <rect rx='{RADIUS}' width='{LEFT_WIDTH}' height='{HEIGHT}' fill='url(#grad-ai-{slug})' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>

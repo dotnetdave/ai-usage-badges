@@ -9,9 +9,13 @@
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
+    <linearGradient id='grad-dark-ai-drafted' x1='0%' y1='0%' x2='0%' y2='100%'>
+      <stop offset='0%' stop-color='#0f1628'/>
+      <stop offset='100%' stop-color='#0b1020'/>
+    </linearGradient>
   </defs>
   <g clip-path='url(#clip-ai-drafted)' shape-rendering='crispEdges'>
-    <rect rx='5' width='134' height='20' fill='#111827' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <rect rx='5' width='134' height='20' fill='url(#grad-dark-ai-drafted)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
     <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-drafted)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
