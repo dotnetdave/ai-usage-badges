@@ -321,11 +321,11 @@
           <div>
             <label for="formatSelect">Format</label>
             <select id="formatSelect">
+              <option value="email">Email footer (SVG)</option>
               <option value="svg-md">Markdown (SVG)</option>
               <option value="svg-html">HTML IMG (SVG)</option>
               <option value="png1-html">HTML IMG (PNG 1x)</option>
               <option value="png2-html">HTML IMG (PNG 2x)</option>
-              <option value="email">Email footer (PNG 2x)</option>
               <option value="sprite">SVG Sprite &lt;use&gt;</option>
             </select>
           </div>
@@ -427,7 +427,7 @@
       case "email":
         return `<div style="font-family:'Segoe UI',Arial,sans-serif;font-size:13px;line-height:18px;">
   <strong>AI Disclosure:</strong><br>
-  <img src="${png2}" alt="${label}" height="40" style="vertical-align:middle;border:none;">
+  <img src="${svgUrl}" alt="${label}" height="20" style="vertical-align:middle;border:none;">
 </div>`;
       case "sprite":
         return `<svg role="img" aria-label="${label}" height="20">
