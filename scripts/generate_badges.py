@@ -33,6 +33,7 @@ BADGES: List[str] = [
 
 LEFT_WIDTH = 44
 HEIGHT = 20
+RADIUS = 5
 PNG_SCALES = {"1x": 1.0, "2x": 2.0}  # label -> scale factor for raster exports
 PADDING = 10
 CHAR_WIDTH = 7.0  # rough average for the selected typeface
@@ -77,14 +78,17 @@ def build_svg(label: str) -> str:
 <svg xmlns='http://www.w3.org/2000/svg' width='{total_width}' height='{HEIGHT}' role='img' aria-label='{label}'>
   <title>{label}</title>
   <defs>
+    <clipPath id='clip-{slug}'>
+      <rect rx='{RADIUS}' width='{total_width}' height='{HEIGHT}' />
+    </clipPath>
     <linearGradient id='grad-ai-{slug}' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='{GRADIENT_START}'/>
       <stop offset='100%' stop-color='{GRADIENT_END}'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='{total_width}' height='{HEIGHT}' fill='{RIGHT_FILL}' stroke='{OUTLINE}' stroke-width='1'/>
-    <rect rx='3' width='{LEFT_WIDTH}' height='{HEIGHT}' fill='url(#grad-ai-{slug})' stroke='{OUTLINE}' stroke-width='1'/>
+  <g clip-path='url(#clip-{slug})' shape-rendering='crispEdges'>
+    <rect rx='{RADIUS}' width='{total_width}' height='{HEIGHT}' fill='{RIGHT_FILL}' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='{RADIUS}' width='{LEFT_WIDTH}' height='{HEIGHT}' fill='url(#grad-ai-{slug})' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M {LEFT_WIDTH} 1.5 V {HEIGHT - 1.5}'/>
@@ -146,7 +150,7 @@ def write_png(svg_path: Path, width: int, height: int, label: str, scale_label: 
     scale_factor = height / HEIGHT
     left_px = int(LEFT_WIDTH * scale_factor)
     pad_px = int(PADDING * scale_factor)
-    radius = max(2, int(3 * scale_factor))
+    radius = max(2, int(RADIUS * scale_factor))
 
     img = Image.new("RGBA", (width, height), hex_to_rgb(RIGHT_FILL) + (255,))
     draw = ImageDraw.Draw(img)

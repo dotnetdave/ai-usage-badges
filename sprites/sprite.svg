@@ -3,14 +3,17 @@
 
   <title>Human Original</title>
   <defs>
+    <clipPath id='clip-human-original'>
+      <rect rx='5' width='162' height='20' />
+    </clipPath>
     <linearGradient id='grad-ai-human-original' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='162' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
-    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-original)' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
+  <g clip-path='url(#clip-human-original)' shape-rendering='crispEdges'>
+    <rect rx='5' width='162' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-original)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
@@ -26,14 +29,17 @@
 
   <title>Human Original • AI Polished</title>
   <defs>
+    <clipPath id='clip-human-original-ai-polished'>
+      <rect rx='5' width='260' height='20' />
+    </clipPath>
     <linearGradient id='grad-ai-human-original-ai-polished' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='260' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
-    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-original-ai-polished)' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
+  <g clip-path='url(#clip-human-original-ai-polished)' shape-rendering='crispEdges'>
+    <rect rx='5' width='260' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-original-ai-polished)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
@@ -49,14 +55,17 @@
 
   <title>Human Written • AI Reviewed</title>
   <defs>
+    <clipPath id='clip-human-written-ai-reviewed'>
+      <rect rx='5' width='253' height='20' />
+    </clipPath>
     <linearGradient id='grad-ai-human-written-ai-reviewed' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='253' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
-    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-written-ai-reviewed)' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
+  <g clip-path='url(#clip-human-written-ai-reviewed)' shape-rendering='crispEdges'>
+    <rect rx='5' width='253' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-written-ai-reviewed)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
@@ -72,14 +81,17 @@
 
   <title>AI Suggested • Human Approved</title>
   <defs>
+    <clipPath id='clip-ai-suggested-human-approved'>
+      <rect rx='5' width='267' height='20' />
+    </clipPath>
     <linearGradient id='grad-ai-ai-suggested-human-approved' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='267' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
-    <rect rx='3' width='44' height='20' fill='url(#grad-ai-ai-suggested-human-approved)' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
+  <g clip-path='url(#clip-ai-suggested-human-approved)' shape-rendering='crispEdges'>
+    <rect rx='5' width='267' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-suggested-human-approved)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
@@ -95,14 +107,17 @@
 
   <title>Human Curated</title>
   <defs>
+    <clipPath id='clip-human-curated'>
+      <rect rx='5' width='155' height='20' />
+    </clipPath>
     <linearGradient id='grad-ai-human-curated' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='155' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
-    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-curated)' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
+  <g clip-path='url(#clip-human-curated)' shape-rendering='crispEdges'>
+    <rect rx='5' width='155' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-curated)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
@@ -118,14 +133,17 @@
 
   <title>Human–AI Co-Created</title>
   <defs>
+    <clipPath id='clip-human-ai-co-created'>
+      <rect rx='5' width='197' height='20' />
+    </clipPath>
     <linearGradient id='grad-ai-human-ai-co-created' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='197' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
-    <rect rx='3' width='44' height='20' fill='url(#grad-ai-human-ai-co-created)' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
+  <g clip-path='url(#clip-human-ai-co-created)' shape-rendering='crispEdges'>
+    <rect rx='5' width='197' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-human-ai-co-created)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
@@ -141,14 +159,17 @@
 
   <title>AI Drafted • Human Edited</title>
   <defs>
+    <clipPath id='clip-ai-drafted-human-edited'>
+      <rect rx='5' width='239' height='20' />
+    </clipPath>
     <linearGradient id='grad-ai-ai-drafted-human-edited' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='239' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
-    <rect rx='3' width='44' height='20' fill='url(#grad-ai-ai-drafted-human-edited)' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
+  <g clip-path='url(#clip-ai-drafted-human-edited)' shape-rendering='crispEdges'>
+    <rect rx='5' width='239' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-drafted-human-edited)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
@@ -164,14 +185,17 @@
 
   <title>AI Drafted</title>
   <defs>
+    <clipPath id='clip-ai-drafted'>
+      <rect rx='5' width='134' height='20' />
+    </clipPath>
     <linearGradient id='grad-ai-ai-drafted' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='134' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
-    <rect rx='3' width='44' height='20' fill='url(#grad-ai-ai-drafted)' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
+  <g clip-path='url(#clip-ai-drafted)' shape-rendering='crispEdges'>
+    <rect rx='5' width='134' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-drafted)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
@@ -187,14 +211,17 @@
 
   <title>AI Generated</title>
   <defs>
+    <clipPath id='clip-ai-generated'>
+      <rect rx='5' width='148' height='20' />
+    </clipPath>
     <linearGradient id='grad-ai-ai-generated' x1='0%' y1='0%' x2='100%' y2='100%'>
       <stop offset='0%' stop-color='#7B5CF9'/>
       <stop offset='100%' stop-color='#E549FF'/>
     </linearGradient>
   </defs>
-  <g shape-rendering='crispEdges'>
-    <rect rx='3' width='148' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
-    <rect rx='3' width='44' height='20' fill='url(#grad-ai-ai-generated)' stroke='rgba(255,255,255,0.18)' stroke-width='1'/>
+  <g clip-path='url(#clip-ai-generated)' shape-rendering='crispEdges'>
+    <rect rx='5' width='148' height='20' fill='#111827' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
+    <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-generated)' stroke='rgba(255,255,255,0.18)' stroke-width='1' stroke-linejoin='round'/>
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
