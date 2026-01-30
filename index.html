@@ -240,63 +240,63 @@
       <h2 class="section-title">Badges</h2>
       <div class="grid">
         <div class="badge-row">
-          <img src="badges/svg/human-original.svg" alt="Human Original badge">
+          <img src="badges/svg/human-original.svg?v=v2" alt="Human Original badge">
           <div>
             <p class="badge-title">Human Original</p>
             <p class="badge-copy">Created without AI assistance.</p>
           </div>
         </div>
         <div class="badge-row">
-          <img src="badges/svg/human-original-ai-polished.svg" alt="Human Original • AI Polished badge">
+          <img src="badges/svg/human-original-ai-polished.svg?v=v2" alt="Human Original • AI Polished badge">
           <div>
             <p class="badge-title">Human Original • AI Polished</p>
             <p class="badge-copy">Human wrote it AI only refinished (grammar tone tightening).</p>
           </div>
         </div>
         <div class="badge-row">
-          <img src="badges/svg/human-written-ai-reviewed.svg" alt="Human Written • AI Reviewed badge">
+          <img src="badges/svg/human-written-ai-reviewed.svg?v=v2" alt="Human Written • AI Reviewed badge">
           <div>
             <p class="badge-title">Human Written • AI Reviewed</p>
             <p class="badge-copy">Human authored AI used for review or quality checks only.</p>
           </div>
         </div>
         <div class="badge-row">
-          <img src="badges/svg/ai-suggested-human-approved.svg" alt="AI Suggested • Human Approved badge">
+          <img src="badges/svg/ai-suggested-human-approved.svg?v=v2" alt="AI Suggested • Human Approved badge">
           <div>
             <p class="badge-title">AI Suggested • Human Approved</p>
             <p class="badge-copy">AI proposed options human selected and lightly adjusted.</p>
           </div>
         </div>
         <div class="badge-row">
-          <img src="badges/svg/human-curated.svg" alt="Human Curated badge">
+          <img src="badges/svg/human-curated.svg?v=v2" alt="Human Curated badge">
           <div>
             <p class="badge-title">Human Curated</p>
             <p class="badge-copy">Human selected or arranged AI outputs from multiple candidates.</p>
           </div>
         </div>
         <div class="badge-row">
-          <img src="badges/svg/human-ai-co-created.svg" alt="Human–AI Co-Created badge">
+          <img src="badges/svg/human-ai-co-created.svg?v=v2" alt="Human–AI Co-Created badge">
           <div>
             <p class="badge-title">Human–AI Co-Created</p>
             <p class="badge-copy">Human and AI collaborated iteratively shared authorship of ideas and wording.</p>
           </div>
         </div>
         <div class="badge-row">
-          <img src="badges/svg/ai-drafted-human-edited.svg" alt="AI Drafted • Human Edited badge">
+          <img src="badges/svg/ai-drafted-human-edited.svg?v=v2" alt="AI Drafted • Human Edited badge">
           <div>
             <p class="badge-title">AI Drafted • Human Edited</p>
             <p class="badge-copy">AI first draft then substantive human rewriting or fact-checking.</p>
           </div>
         </div>
         <div class="badge-row">
-          <img src="badges/svg/ai-drafted.svg" alt="AI Drafted badge">
+          <img src="badges/svg/ai-drafted.svg?v=v2" alt="AI Drafted badge">
           <div>
             <p class="badge-title">AI Drafted</p>
             <p class="badge-copy">AI produced the first draft; minimal human edits.</p>
           </div>
         </div>
         <div class="badge-row">
-          <img src="badges/svg/ai-generated.svg" alt="AI Generated badge">
+          <img src="badges/svg/ai-generated.svg?v=v2" alt="AI Generated badge">
           <div>
             <p class="badge-title">AI Generated</p>
             <p class="badge-copy">AI produced the final artifact with no meaningful human edits.</p>
@@ -349,6 +349,7 @@
   </div>
 </body>
 <script>
+  const ASSET_VERSION = "v2";
   const badges = [
     { slug: "human-original", label: "Human Original" },
     { slug: "human-original-ai-polished", label: "Human Original • AI Polished" },
@@ -375,15 +376,17 @@
     badgeSelect.appendChild(opt);
   });
 
-  function abs(path) {
-    return new URL(path, window.location.href).href;
+  function withV(path) {
+    const url = new URL(path, window.location.href);
+    url.searchParams.set("v", ASSET_VERSION);
+    return url.href;
   }
 
   function buildSnippet(slug, label, fmt) {
-    const svgUrl = abs(`badges/svg/${slug}.svg`);
-    const png1 = abs(`badges/png/1x/${slug}.png`);
-    const png2 = abs(`badges/png/2x/${slug}.png`);
-    const sprite = abs(`sprites/sprite.svg#${slug}`);
+    const svgUrl = withV(`badges/svg/${slug}.svg`);
+    const png1 = withV(`badges/png/1x/${slug}.png`);
+    const png2 = withV(`badges/png/2x/${slug}.png`);
+    const sprite = withV(`sprites/sprite.svg#${slug}`);
 
     switch (fmt) {
       case "svg-md":
@@ -414,7 +417,7 @@
     const label = badges.find(b => b.slug === slug)?.label ?? "";
 
     // Preview prefers SVG for crispness
-    preview.src = abs(`badges/svg/${slug}.svg`);
+    preview.src = withV(`badges/svg/${slug}.svg`);
     preview.alt = label;
 
     snippet.value = buildSnippet(slug, label, fmt);
