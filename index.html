@@ -197,6 +197,34 @@
       pre { white-space: pre-wrap; word-break: break-word; }
     }
   </style>
+
+  <!--
+    ANALYTICS SETUP (Optional)
+    The page tracks badge usage via trackEvent() function. To collect data:
+
+    Option 1: Google Analytics
+    Add before </head>:
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    Option 2: Plausible Analytics
+    Add before </head>:
+    <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
+
+    Option 3: View local stats
+    Open browser console and run: getBadgeStats()
+
+    Events tracked:
+    - badge_selected: When user picks a badge
+    - format_changed: When user changes format (SVG, PNG, etc.)
+    - code_copied: When user copies embed code
+    - image_copied: When user copies badge image (PNG or SVG)
+  -->
 </head>
 <body>
   <div class="shell">
@@ -445,6 +473,50 @@
     { slug: "ai-generated", label: "AI Generated" },
   ];
 
+  // ============================================================================
+  // USAGE TRACKING
+  // Tracks badge selection, format changes, and copy actions to understand
+  // which badges are most popular. Works with Google Analytics, Plausible,
+  // or stores data locally. View stats in console: getBadgeStats()
+  // ============================================================================
+
+  function trackEvent(action, properties = {}) {
+    // Google Analytics (gtag.js)
+    if (typeof gtag !== 'undefined') {
+      gtag('event', action, properties);
+    }
+    // Plausible Analytics
+    if (typeof plausible !== 'undefined') {
+      plausible(action, { props: properties });
+    }
+    // Console logging for development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      console.log('[Analytics]', action, properties);
+    }
+    // Store locally for usage statistics
+    try {
+      const stats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
+      const key = `${action}_${properties.badge || 'unknown'}`;
+      stats[key] = (stats[key] || 0) + 1;
+      stats.lastTracked = new Date().toISOString();
+      localStorage.setItem('badge-stats', JSON.stringify(stats));
+    } catch (e) {
+      // Silent fail if localStorage unavailable
+    }
+  }
+
+  // Helper function to view collected badge usage stats (call from console)
+  window.getBadgeStats = function() {
+    try {
+      const stats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
+      console.table(stats);
+      return stats;
+    } catch (e) {
+      console.error('Failed to retrieve badge stats:', e);
+      return {};
+    }
+  };
+
   const badgeSelect = document.getElementById("badgeSelect");
   const formatSelect = document.getElementById("formatSelect");
   const preview = document.getElementById("badgePreview");
@@ -452,6 +524,7 @@
   const toast = document.getElementById("toast");
   const copyBtn = document.getElementById("copyBtn");
   const copyImgBtn = document.getElementById("copyImgBtn");
+  const copySvgBtn = document.getElementById("copySvgBtn");
 
   badges.forEach(b => {
     const opt = document.createElement("option");
@@ -507,12 +580,28 @@
     snippet.value = buildSnippet(slug, label, fmt);
   }
 
-  badgeSelect.addEventListener("change", updateUI);
-  formatSelect.addEventListener("change", updateUI);
+  badgeSelect.addEventListener("change", () => {
+    const slug = badgeSelect.value;
+    const label = badges.find(b => b.slug === slug)?.label ?? "";
+    trackEvent('badge_selected', { badge: slug, label: label });
+    updateUI();
+  });
+
+  formatSelect.addEventListener("change", () => {
+    const slug = badgeSelect.value;
+    const fmt = formatSelect.value;
+    trackEvent('format_changed', { badge: slug, format: fmt });
+    updateUI();
+  });
 
   copyBtn.addEventListener("click", async () => {
+    const slug = badgeSelect.value;
+    const fmt = formatSelect.value;
+    const label = badges.find(b => b.slug === slug)?.label ?? "";
+
     try {
       await navigator.clipboard.writeText(snippet.value);
+      trackEvent('code_copied', { badge: slug, label: label, format: fmt });
       toast.textContent = "Copied";
       toast.classList.add("show");
       setTimeout(() => toast.classList.remove("show"), 1500);
@@ -544,7 +633,38 @@
       const blob = await res.blob();
       const item = new ClipboardItem({ [blob.type]: blob });
       await navigator.clipboard.write([item]);
+      trackEvent('image_copied', { badge: slug, label: label, format: 'png' });
       toast.textContent = "Badge image copied";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1500);
+    } catch (err) {
+      fallbackOpen();
+    }
+  });
+
+  copySvgBtn.addEventListener("click", async () => {
+    const slug = badgeSelect.value;
+    const label = badges.find(b => b.slug === slug)?.label ?? "AI badge";
+    const svgUrl = withV(`badges/svg/${slug}.svg`);
+    const fallbackOpen = () => {
+      window.open(svgUrl, "_blank", "noopener");
+      toast.textContent = "Clipboard blocked; opened SVG to copy manually";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    };
+
+    if (!isSecureContext || typeof ClipboardItem === "undefined" || !navigator.clipboard?.write) {
+      fallbackOpen();
+      return;
+    }
+
+    try {
+      const res = await fetch(svgUrl);
+      const blob = await res.blob();
+      const item = new ClipboardItem({ [blob.type]: blob });
+      await navigator.clipboard.write([item]);
+      trackEvent('image_copied', { badge: slug, label: label, format: 'svg' });
+      toast.textContent = "Badge SVG copied";
       toast.classList.add("show");
       setTimeout(() => toast.classList.remove("show"), 1500);
     } catch (err) {
