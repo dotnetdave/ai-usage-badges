@@ -238,6 +238,14 @@
       </p>
     </header>
 
+    <div style="text-align: center; margin: 28px 0 32px; padding: 20px; background: rgba(123, 92, 249, 0.05); border-radius: 12px; border: 1px solid rgba(123, 92, 249, 0.15);">
+      <p class="muted" style="margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600;">Total Badge Uses</p>
+      <p id="usageCount" style="margin: 0; font-size: 42px; font-weight: 700; background: linear-gradient(135deg, #7B5CF9, #E549FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;">
+        Loading...
+      </p>
+      <p class="muted" style="margin: 8px 0 0; font-size: 13px;">Badges copied and embedded across teams</p>
+    </div>
+
     <section>
       <h2 class="section-title">The Problem</h2>
       <div class="card">
@@ -500,6 +508,12 @@
       stats[key] = (stats[key] || 0) + 1;
       stats.lastTracked = new Date().toISOString();
       localStorage.setItem('badge-stats', JSON.stringify(stats));
+
+      // Update counter for copy actions (in dev/demo mode)
+      if ((action === 'code_copied' || action === 'image_copied') &&
+          (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+        updateUsageCounter();
+      }
     } catch (e) {
       // Silent fail if localStorage unavailable
     }
@@ -516,6 +530,62 @@
       return {};
     }
   };
+
+  // ============================================================================
+  // USAGE COUNTER
+  // Displays total badge uses with magnitude formatting (1k, 10k, 100k, 1M+)
+  // Update TOTAL_BADGE_USES manually or connect to an API endpoint
+  // ============================================================================
+
+  const TOTAL_BADGE_USES = 2847; // Update this value periodically
+
+  function formatMagnitude(num) {
+    if (num < 1000) {
+      return num.toString();
+    } else if (num < 10000) {
+      // 1k - 9.9k (show decimal for 1k-9k range)
+      return (num / 1000).toFixed(1).replace('.0', '') + 'k';
+    } else if (num < 1000000) {
+      // 10k - 999k (no decimal)
+      return Math.floor(num / 1000) + 'k';
+    } else if (num < 10000000) {
+      // 1M - 9.9M (show decimal)
+      return (num / 1000000).toFixed(1).replace('.0', '') + 'M';
+    } else if (num < 1000000000) {
+      // 10M - 999M (no decimal)
+      return Math.floor(num / 1000000) + 'M';
+    } else {
+      // 1B+ (show decimal)
+      return (num / 1000000000).toFixed(1).replace('.0', '') + 'B';
+    }
+  }
+
+  function updateUsageCounter() {
+    const counterEl = document.getElementById('usageCount');
+    if (counterEl) {
+      // Use configured count, or fallback to local tracking count
+      let totalUses = TOTAL_BADGE_USES;
+
+      // Optionally add local session count for demonstration
+      try {
+        const localStats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
+        const localCount = Object.keys(localStats)
+          .filter(k => k.startsWith('code_copied_') || k.startsWith('image_copied_'))
+          .reduce((sum, key) => sum + (localStats[key] || 0), 0);
+        // Don't add to total for production, but useful for testing
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          totalUses += localCount;
+        }
+      } catch (e) {
+        // Ignore localStorage errors
+      }
+
+      counterEl.textContent = formatMagnitude(totalUses);
+    }
+  }
+
+  // Update counter on page load
+  updateUsageCounter();
 
   const badgeSelect = document.getElementById("badgeSelect");
   const formatSelect = document.getElementById("formatSelect");
