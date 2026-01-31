@@ -159,11 +159,30 @@ def write_png(svg_path: Path, width: int, height: int, label: str, scale_label: 
     pad_px = int(PADDING * scale_factor)
     radius = max(2, int(RADIUS * scale_factor))
 
-    img = Image.new("RGBA", (width, height), hex_to_rgb(RIGHT_FILL) + (255,))
+    # Start with transparent background
+    img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    # Rounded background
-    draw.rounded_rectangle([(0, 0), (width - 1, height - 1)], radius=radius, fill=hex_to_rgb(RIGHT_FILL) + (255,), outline=OUTLINE_RGBA, width=1)
+    # Draw rounded background for right section with dark gradient
+    dark_bg = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    dark_draw = ImageDraw.Draw(dark_bg)
+    # Create vertical dark gradient for the right section
+    dark_start_r, dark_start_g, dark_start_b = hex_to_rgb(DARK_GRADIENT_START)
+    dark_end_r, dark_end_g, dark_end_b = hex_to_rgb(DARK_GRADIENT_END)
+    for y in range(height):
+        t = y / float(max(height - 1, 1))
+        r = int(dark_start_r + (dark_end_r - dark_start_r) * t)
+        g = int(dark_start_g + (dark_end_g - dark_start_g) * t)
+        b = int(dark_start_b + (dark_end_b - dark_start_b) * t)
+        dark_draw.line([(0, y), (width, y)], fill=(r, g, b, 255))
+    # Create mask for rounded rectangle
+    dark_mask = Image.new("L", (width, height), 0)
+    dark_mask_draw = ImageDraw.Draw(dark_mask)
+    dark_mask_draw.rounded_rectangle([(0, 0), (width - 1, height - 1)], radius=radius, fill=255)
+    img.paste(dark_bg, (0, 0), dark_mask)
+    # Draw dark stroke around entire badge
+    dark_stroke_rgba = hex_to_rgb(DARK_STROKE) + (255,)
+    draw.rounded_rectangle([(0, 0), (width - 1, height - 1)], radius=radius, outline=dark_stroke_rgba, width=1)
 
     # Gradient for left chip
     start_r, start_g, start_b = hex_to_rgb(GRADIENT_START)
