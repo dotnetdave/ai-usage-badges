@@ -534,10 +534,12 @@
   // ============================================================================
   // USAGE COUNTER
   // Displays total badge uses with magnitude formatting (1k, 10k, 100k, 1M+)
-  // Update TOTAL_BADGE_USES manually or connect to an API endpoint
+  // Fetches live count from Google Analytics API via backend proxy
+  // Falls back to TOTAL_BADGE_USES if API unavailable
   // ============================================================================
 
-  const TOTAL_BADGE_USES = 2847; // Update this value periodically
+  const TOTAL_BADGE_USES = 2847; // Fallback value if API unavailable
+  const ANALYTICS_API_ENDPOINT = '/api/badge-count'; // Update with your API endpoint URL
 
   function formatMagnitude(num) {
     if (num < 1000) {
@@ -560,28 +562,49 @@
     }
   }
 
-  function updateUsageCounter() {
+  async function updateUsageCounter() {
     const counterEl = document.getElementById('usageCount');
-    if (counterEl) {
-      // Use configured count, or fallback to local tracking count
-      let totalUses = TOTAL_BADGE_USES;
+    if (!counterEl) return;
 
-      // Optionally add local session count for demonstration
+    let totalUses = TOTAL_BADGE_USES; // Start with fallback
+
+    // Try to fetch live count from Google Analytics API
+    try {
+      const response = await fetch(ANALYTICS_API_ENDPOINT, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+        cache: 'no-cache'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // API should return: { count: 12345, timestamp: "2024-01-31T..." }
+        if (data.count && typeof data.count === 'number') {
+          totalUses = data.count;
+          console.log('[Analytics] Live count fetched:', totalUses);
+        }
+      } else {
+        console.warn('[Analytics] API returned error:', response.status);
+      }
+    } catch (error) {
+      console.warn('[Analytics] Failed to fetch live count, using fallback:', error.message);
+    }
+
+    // Optionally add local session count for demonstration in dev
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       try {
         const localStats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
         const localCount = Object.keys(localStats)
           .filter(k => k.startsWith('code_copied_') || k.startsWith('image_copied_'))
           .reduce((sum, key) => sum + (localStats[key] || 0), 0);
-        // Don't add to total for production, but useful for testing
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-          totalUses += localCount;
-        }
+        totalUses += localCount;
+        console.log('[Analytics] Added local count:', localCount);
       } catch (e) {
         // Ignore localStorage errors
       }
-
-      counterEl.textContent = formatMagnitude(totalUses);
     }
+
+    counterEl.textContent = formatMagnitude(totalUses);
   }
 
   // Update counter on page load
