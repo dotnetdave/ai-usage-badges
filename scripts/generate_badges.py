@@ -95,7 +95,7 @@ def build_svg(label: str) -> str:
   </defs>
   <g clip-path='url(#clip-{slug})' shape-rendering='crispEdges'>
     <rect rx='{RADIUS}' width='{total_width}' height='{HEIGHT}' fill='url(#grad-dark-{slug})' stroke='{DARK_STROKE}' stroke-width='1' stroke-linejoin='round' />
-    <rect rx='{RADIUS}' width='{LEFT_WIDTH}' height='{HEIGHT}' fill='url(#grad-ai-{slug})' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round' />
+    <path d='M {RADIUS} 0 A {RADIUS} {RADIUS} 0 0 0 0 {RADIUS} L 0 {HEIGHT - RADIUS} A {RADIUS} {RADIUS} 0 0 0 {RADIUS} {HEIGHT} L {LEFT_WIDTH} {HEIGHT} L {LEFT_WIDTH} 0 Z' fill='url(#grad-ai-{slug})' stroke='{OUTLINE}' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M {LEFT_WIDTH} 1.5 V {HEIGHT - 1.5}'/>
@@ -204,8 +204,19 @@ def write_png(svg_path: Path, width: int, height: int, label: str, scale_label: 
     m_draw.pieslice([0, 0, radius * 2, radius * 2], 180, 270, fill=255)
     m_draw.pieslice([0, height - radius * 2, radius * 2, height], 90, 180, fill=255)
     img.paste(gradient, (0, 0), mask)
-    # Outline on the gradient chip
-    draw.rounded_rectangle([(0, 0), (left_px - 1, height - 1)], radius=radius, outline=OUTLINE_RGBA, width=1)
+    # Outline on the gradient chip (left rounded, right straight)
+    # Draw outline as segments to match the left-rounded shape
+    from PIL import ImageDraw as ID
+    outline_img = Image.new("RGBA", (left_px, height), (0, 0, 0, 0))
+    outline_draw = ID.Draw(outline_img)
+    # Create the outline path matching the left-rounded shape
+    outline_draw.arc([0, 0, radius * 2, radius * 2], 180, 270, fill=OUTLINE_RGBA, width=1)  # top-left arc
+    outline_draw.arc([0, height - radius * 2, radius * 2, height], 90, 180, fill=OUTLINE_RGBA, width=1)  # bottom-left arc
+    outline_draw.line([(radius, 0), (left_px - 1, 0)], fill=OUTLINE_RGBA, width=1)  # top edge
+    outline_draw.line([(0, radius), (0, height - radius)], fill=OUTLINE_RGBA, width=1)  # left edge
+    outline_draw.line([(radius, height - 1), (left_px - 1, height - 1)], fill=OUTLINE_RGBA, width=1)  # bottom edge
+    outline_draw.line([(left_px - 1, 0), (left_px - 1, height - 1)], fill=OUTLINE_RGBA, width=1)  # right edge
+    img.paste(outline_img, (0, 0), outline_img)
 
     # Divider
     draw.line([(left_px, 1), (left_px, height - 2)], fill=(255, 255, 255, 20))

@@ -16,7 +16,7 @@
   </defs>
   <g clip-path='url(#clip-ai-drafted)' shape-rendering='crispEdges'>
     <rect rx='5' width='134' height='20' fill='url(#grad-dark-ai-drafted)' stroke='#273143' stroke-width='1' stroke-linejoin='round' />
-    <rect rx='5' width='44' height='20' fill='url(#grad-ai-ai-drafted)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
+    <path d='M 5 0 A 5 5 0 0 0 0 5 L 0 15 A 5 5 0 0 0 5 20 L 44 20 L 44 0 Z' fill='url(#grad-ai-ai-drafted)' stroke='#0D1222' stroke-width='1' stroke-linejoin='round' />
   </g>
   <g fill='none' stroke='rgba(255,255,255,0.08)'>
     <path d='M 44 1.5 V 18.5'/>
