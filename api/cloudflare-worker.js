@@ -1,49 +1,53 @@
 /**
  * CLOUDFLARE WORKERS VERSION
  *
- * Deploy to Cloudflare Workers for edge performance and generous free tier.
+ * Deploy to Cloudflare Workers for edge performance and a small public badge count API.
  *
- * Setup:
- * 1. Create Cloudflare Worker
- * 2. Set environment variables in Worker settings:
- *    - GA_PROPERTY_ID
- *    - GA_SERVICE_ACCOUNT_EMAIL
- *    - GA_PRIVATE_KEY
- * 3. Deploy this code
- * 4. Update ANALYTICS_API_ENDPOINT in index.html to Worker URL
+ * Environment variables:
+ * - GA_PROPERTY_ID
+ * - GA_SERVICE_ACCOUNT_EMAIL
+ * - GA_PRIVATE_KEY
  */
 
+const CACHE_DURATION = 300;
+const BADGE_USAGE_EVENTS = ['code_copied', 'image_copied'];
+
 export default {
-  async fetch(request, env, ctx) {
-    // CORS headers
+  async fetch(request, env) {
     const headers = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Accept',
       'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=300' // Cache for 5 minutes
+      'Cache-Control': `public, max-age=${CACHE_DURATION}`
     };
 
     if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 200, headers });
+      return new Response(null, { status: 204, headers });
+    }
+
+    if (request.method !== 'GET') {
+      return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+        status: 405,
+        headers: { ...headers, Allow: 'GET, OPTIONS' }
+      });
     }
 
     try {
       const count = await fetchBadgeCountFromGA(env);
 
       return new Response(JSON.stringify({
-        count: count,
+        count,
         timestamp: new Date().toISOString(),
-        cached: 300
+        cached: CACHE_DURATION
       }), {
         status: 200,
         headers
       });
-
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error fetching GA badge count:', error);
       return new Response(JSON.stringify({
-        error: 'Failed to fetch analytics data',
-        message: error.message
+        error: 'Badge count unavailable'
       }), {
         status: 500,
         headers
@@ -53,8 +57,9 @@ export default {
 };
 
 async function fetchBadgeCountFromGA(env) {
-  const accessToken = await getGoogleAccessToken(env);
+  validateConfig(env);
 
+  const accessToken = await getGoogleAccessToken(env);
   const url = `https://analyticsdata.googleapis.com/v1beta/properties/${env.GA_PROPERTY_ID}:runReport`;
 
   const response = await fetch(url, {
@@ -71,7 +76,7 @@ async function fetchBadgeCountFromGA(env) {
         filter: {
           fieldName: 'eventName',
           inListFilter: {
-            values: ['code_copied', 'image_copied']
+            values: BADGE_USAGE_EVENTS
           }
         }
       }
@@ -79,16 +84,26 @@ async function fetchBadgeCountFromGA(env) {
   });
 
   if (!response.ok) {
-    throw new Error(`GA API error: ${response.status}`);
+    const errorText = await response.text();
+    throw new Error(`GA API error: ${response.status} - ${errorText}`);
   }
 
   const data = await response.json();
+  const value = data.rows?.[0]?.metricValues?.[0]?.value ?? '0';
+  const count = Number.parseInt(value, 10);
 
-  if (data.rows && data.rows.length > 0) {
-    return parseInt(data.rows[0].metricValues[0].value, 10);
+  return Number.isFinite(count) ? count : 0;
+}
+
+function validateConfig(env) {
+  const missing = [];
+  if (!env.GA_PROPERTY_ID) missing.push('GA_PROPERTY_ID');
+  if (!env.GA_SERVICE_ACCOUNT_EMAIL) missing.push('GA_SERVICE_ACCOUNT_EMAIL');
+  if (!env.GA_PRIVATE_KEY) missing.push('GA_PRIVATE_KEY');
+
+  if (missing.length > 0) {
+    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
   }
-
-  return 0;
 }
 
 async function getGoogleAccessToken(env) {
@@ -104,7 +119,8 @@ async function getGoogleAccessToken(env) {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to get access token');
+    const errorText = await response.text();
+    throw new Error(`Failed to get access token: ${response.status} - ${errorText}`);
   }
 
   const data = await response.json();
@@ -127,7 +143,6 @@ async function createJWT(env) {
   const encodedClaim = base64UrlEncode(JSON.stringify(claim));
   const signatureInput = `${encodedHeader}.${encodedClaim}`;
 
-  // Import Web Crypto API
   const privateKey = await importPrivateKey(env.GA_PRIVATE_KEY);
   const signature = await crypto.subtle.sign(
     { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
