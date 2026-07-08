@@ -1,118 +1,102 @@
 # Badge Counter API
 
-Serverless function to fetch total badge usage count from Google Analytics 4.
+Serverless functions for fetching total badge usage count from Google Analytics 4.
 
-## Quick Start
+The API counts the badge copy events used by the demo page:
 
-### 1. Set Up Google Analytics 4
+- `code_copied`
+- `image_copied`
 
-1. Go to [Google Cloud Console](https://console.cloud.google.com)
-2. Create a new project or select existing
-3. Enable **Google Analytics Data API**
-4. Go to **IAM & Admin** → **Service Accounts**
-5. Create service account with **Analytics Viewer** role
-6. Create JSON key and download it
-7. In your GA4 property, add the service account email with **Viewer** permissions
+## Required environment variables
 
-### 2. Deploy to Vercel
+- `GA_PROPERTY_ID`: Numeric GA4 property ID from GA Admin
+- `GA_SERVICE_ACCOUNT_EMAIL`: Service account email
+- `GA_PRIVATE_KEY`: Private key from the service account JSON key, including the BEGIN and END lines
+
+## Google Analytics setup
+
+1. Go to Google Cloud Console.
+2. Create a new project or select an existing project.
+3. Enable **Google Analytics Data API**.
+4. Go to **IAM & Admin** → **Service Accounts**.
+5. Create a service account with Analytics Viewer access.
+6. Create and download a JSON key.
+7. In your GA4 property, add the service account email with Viewer permissions.
+
+## Vercel deployment
+
+Use `api/badge-count.js` for Vercel or another Node based serverless platform.
 
 ```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-
-# Set environment variables in Vercel dashboard or CLI:
 vercel env add GA_PROPERTY_ID
 vercel env add GA_SERVICE_ACCOUNT_EMAIL
 vercel env add GA_PRIVATE_KEY
+vercel
 ```
 
-**Environment Variables:**
-- `GA_PROPERTY_ID`: Your GA4 property ID (find in GA Admin → Property Settings)
-- `GA_SERVICE_ACCOUNT_EMAIL`: Email from service account JSON key
-- `GA_PRIVATE_KEY`: Private key from service account JSON key (entire key including BEGIN/END lines)
+The default front-end endpoint is:
 
-### 3. Update index.html
-
-Replace the API endpoint URL:
-
-```javascript
-const ANALYTICS_API_ENDPOINT = 'https://your-project.vercel.app/api/badge-count';
+```js
+const ANALYTICS_API_ENDPOINT = '/api/badge-count';
 ```
 
-## Alternative: Cloudflare Workers
+Change it in `index.html` only if the API is hosted on another domain.
 
-Create a Cloudflare Worker with this code:
+## Cloudflare Workers deployment
 
-```javascript
-export default {
-  async fetch(request, env) {
-    // Same logic as badge-count.js but using env.GA_PROPERTY_ID, etc.
-    // See Cloudflare Workers documentation for environment variables
-  }
-}
-```
+Use `api/cloudflare-worker.js` for Cloudflare Workers.
 
-## Alternative: Netlify Functions
+1. Create a Worker.
+2. Add the three required environment variables.
+3. Deploy the Worker script.
+4. Update `ANALYTICS_API_ENDPOINT` in `index.html` to the Worker URL if it is not hosted under the same domain.
 
-1. Create `netlify/functions/badge-count.js`
-2. Use same code as `api/badge-count.js`
-3. Set environment variables in Netlify dashboard
-4. API URL will be: `https://your-site.netlify.app/.netlify/functions/badge-count`
-
-## Alternative: Simple Manual Updates
-
-If you don't want a live API, just update the count manually:
-
-1. Check Google Analytics dashboard weekly/monthly
-2. Sum `code_copied` + `image_copied` events
-3. Update `TOTAL_BADGE_USES` in index.html:
-   ```javascript
-   const TOTAL_BADGE_USES = 12345; // Your actual count
-   ```
-
-## API Response Format
+## API response format
 
 ```json
 {
   "count": 12345,
-  "timestamp": "2024-01-31T12:00:00.000Z",
+  "timestamp": "2026-01-31T12:00:00.000Z",
   "cached": 300
 }
 ```
 
+If the analytics call fails, the public API response is intentionally generic:
+
+```json
+{
+  "error": "Badge count unavailable"
+}
+```
+
+Detailed errors are logged server-side only.
+
 ## Caching
 
-The API caches responses for 5 minutes (300 seconds) by default. Adjust `CACHE_DURATION` in the function code.
+Responses are cached for 5 minutes by default. Adjust `CACHE_DURATION` in the function code.
 
-## Testing Locally
+## Local testing
 
 ```bash
-# Install dependencies
 npm install
-
-# Run Vercel dev server
 vercel dev
-
-# Test endpoint
 curl http://localhost:3000/api/badge-count
 ```
 
 ## Troubleshooting
 
-**Error: Missing environment variables**
-- Ensure all three env vars are set: GA_PROPERTY_ID, GA_SERVICE_ACCOUNT_EMAIL, GA_PRIVATE_KEY
+**Error: Badge count unavailable**
 
-**Error: 403 Forbidden**
-- Service account needs Viewer permissions in GA4 property
-- Check that Analytics Data API is enabled in Google Cloud Console
+Check the server logs. Common causes:
 
-**Error: 404 Not Found**
-- Verify GA_PROPERTY_ID is correct (numeric ID from GA Admin)
+- Missing environment variables
+- Incorrect GA4 property ID
+- Service account missing Viewer permissions in GA4
+- Google Analytics Data API not enabled
+- Private key not copied with the BEGIN and END lines
 
 **Count shows 0**
-- Events may not be tracked yet (wait for some badge copies)
-- Verify event names match: `code_copied` and `image_copied`
-- Check date range in query (currently starts from 2024-01-01)
+
+- Events may not be tracked yet.
+- Verify that event names match `code_copied` and `image_copied`.
+- Check the date range in the query. It currently starts from `2024-01-01`.
