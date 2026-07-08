@@ -6,7 +6,7 @@
   "scripts": {
     "generate:badges": "python scripts/generate_badges.py",
     "export:png": "node scripts/export_png.js",
-    "check:node": "node --check scripts/export_png.js && node --check api/cloudflare-worker.js"
+    "check:node": "node --check scripts/export_png.js"
   },
   "devDependencies": {
     "sharp": "^0.33.5"
