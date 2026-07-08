@@ -2,78 +2,55 @@
  * GOOGLE ANALYTICS API BADGE COUNTER
  *
  * Serverless function to fetch total badge usage count from Google Analytics 4.
- * Deploy to Vercel, Cloudflare Workers, or any serverless platform.
+ * Deploy to Vercel or any Node based serverless platform.
  *
- * SETUP INSTRUCTIONS:
- * 1. Enable Google Analytics Data API in Google Cloud Console
- * 2. Create a Service Account with Analytics Viewer permissions
- * 3. Download JSON key file
- * 4. Set environment variables (see below)
- * 5. Deploy this function
- * 6. Update ANALYTICS_API_ENDPOINT in index.html to your function URL
+ * Environment variables:
+ * - GA_PROPERTY_ID
+ * - GA_SERVICE_ACCOUNT_EMAIL
+ * - GA_PRIVATE_KEY
  */
-
-// ============================================================================
-// CONFIGURATION
-// ============================================================================
-
-// Environment variables needed:
-// - GA_PROPERTY_ID: Your GA4 property ID (e.g., "123456789")
-// - GA_SERVICE_ACCOUNT_EMAIL: Service account email
-// - GA_PRIVATE_KEY: Service account private key (from JSON key file)
 
 const GA_PROPERTY_ID = process.env.GA_PROPERTY_ID;
 const GA_SERVICE_ACCOUNT_EMAIL = process.env.GA_SERVICE_ACCOUNT_EMAIL;
 const GA_PRIVATE_KEY = process.env.GA_PRIVATE_KEY?.replace(/\\n/g, '\n');
-
-// Cache duration in seconds (e.g., 300 = 5 minutes)
 const CACHE_DURATION = 300;
-
-// ============================================================================
-// VERCEL SERVERLESS FUNCTION
-// ============================================================================
+const BADGE_USAGE_EVENTS = ['code_copied', 'image_copied'];
 
 export default async function handler(req, res) {
-  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
   res.setHeader('Cache-Control', `public, s-maxage=${CACHE_DURATION}`);
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    return res.status(204).end();
+  }
+
+  if (req.method !== 'GET') {
+    res.setHeader('Allow', 'GET, OPTIONS');
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
     const count = await fetchBadgeCountFromGA();
 
     return res.status(200).json({
-      count: count,
+      count,
       timestamp: new Date().toISOString(),
       cached: CACHE_DURATION
     });
   } catch (error) {
-    console.error('Error fetching GA data:', error);
+    console.error('Error fetching GA badge count:', error);
     return res.status(500).json({
-      error: 'Failed to fetch analytics data',
-      message: error.message
+      error: 'Badge count unavailable'
     });
   }
 }
 
-// ============================================================================
-// GOOGLE ANALYTICS DATA API CLIENT
-// ============================================================================
-
 async function fetchBadgeCountFromGA() {
-  // Validate environment variables
-  if (!GA_PROPERTY_ID || !GA_SERVICE_ACCOUNT_EMAIL || !GA_PRIVATE_KEY) {
-    throw new Error('Missing required environment variables for Google Analytics API');
-  }
+  validateConfig();
 
-  // Get access token
   const accessToken = await getGoogleAccessToken();
-
-  // Query Google Analytics Data API
   const url = `https://analyticsdata.googleapis.com/v1beta/properties/${GA_PROPERTY_ID}:runReport`;
 
   const requestBody = {
@@ -84,7 +61,7 @@ async function fetchBadgeCountFromGA() {
       filter: {
         fieldName: 'eventName',
         inListFilter: {
-          values: ['code_copied', 'image_copied']
+          values: BADGE_USAGE_EVENTS
         }
       }
     }
@@ -105,18 +82,22 @@ async function fetchBadgeCountFromGA() {
   }
 
   const data = await response.json();
+  const value = data.rows?.[0]?.metricValues?.[0]?.value ?? '0';
+  const count = Number.parseInt(value, 10);
 
-  // Extract total count from response
-  if (data.rows && data.rows.length > 0) {
-    return parseInt(data.rows[0].metricValues[0].value, 10);
-  }
-
-  return 0;
+  return Number.isFinite(count) ? count : 0;
 }
 
-// ============================================================================
-// GOOGLE OAUTH2 TOKEN GENERATION
-// ============================================================================
+function validateConfig() {
+  const missing = [];
+  if (!GA_PROPERTY_ID) missing.push('GA_PROPERTY_ID');
+  if (!GA_SERVICE_ACCOUNT_EMAIL) missing.push('GA_SERVICE_ACCOUNT_EMAIL');
+  if (!GA_PRIVATE_KEY) missing.push('GA_PRIVATE_KEY');
+
+  if (missing.length > 0) {
+    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+  }
+}
 
 async function getGoogleAccessToken() {
   const jwt = await createJWT();
@@ -131,7 +112,8 @@ async function getGoogleAccessToken() {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to get access token');
+    const errorText = await response.text();
+    throw new Error(`Failed to get access token: ${response.status} - ${errorText}`);
   }
 
   const data = await response.json();
@@ -157,16 +139,14 @@ async function createJWT() {
   const encodedHeader = base64UrlEncode(JSON.stringify(header));
   const encodedClaim = base64UrlEncode(JSON.stringify(claim));
   const signatureInput = `${encodedHeader}.${encodedClaim}`;
-
-  // Sign with private key (requires crypto library)
   const signature = await signRS256(signatureInput, GA_PRIVATE_KEY);
   const encodedSignature = base64UrlEncode(signature);
 
   return `${signatureInput}.${encodedSignature}`;
 }
 
-function base64UrlEncode(str) {
-  const base64 = Buffer.from(str).toString('base64');
+function base64UrlEncode(value) {
+  const base64 = Buffer.from(value).toString('base64');
   return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 }
 
