@@ -326,7 +326,8 @@ def main() -> None:
 
     build_sprite(svg_paths)
 
-    (ROOT / "badges" / "index.json").write_text(json.dumps(build_manifest(), indent=2), encoding="utf-8")
+    manifest = json.dumps(build_manifest(), indent=2) + "\n"
+    (ROOT / "badges" / "index.json").write_text(manifest, encoding="utf-8")
     print(f"Wrote {len(svg_paths)} SVGs, PNGs, sprite, and manifest.")
 
 
