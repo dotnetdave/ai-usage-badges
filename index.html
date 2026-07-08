@@ -9,192 +9,822 @@
   <title>AI Attribution Badges</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #0b1020;
-      --panel: #0f172a;
-      --muted: #94a3b8;
-      --border: #1f2937;
-      --card: rgba(255, 255, 255, 0.02);
-      --accent: linear-gradient(135deg, #7B5CF9 0%, #E549FF 100%);
-      --radius: 12px;
-      --shadow: 0 18px 45px rgba(8, 12, 26, 0.35);
+      color-scheme: dark;
+      --bg: #070a16;
+      --bg-soft: #0b1020;
+      --surface: rgba(16, 22, 43, 0.76);
+      --surface-strong: rgba(19, 27, 52, 0.92);
+      --surface-raised: rgba(255, 255, 255, 0.07);
+      --text: #f8fafc;
+      --text-soft: #dbe4f3;
+      --muted: #9aa8bd;
+      --faint: #66758c;
+      --border: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.22);
+      --violet: #8b5cf6;
+      --pink: #f04dff;
+      --cyan: #4ee7ff;
+      --green: #86efac;
+      --warning: #fbbf24;
+      --accent: linear-gradient(135deg, var(--violet) 0%, var(--pink) 58%, var(--cyan) 100%);
+      --accent-soft: rgba(139, 92, 246, 0.18);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+      --radius-xl: 36px;
+      --shadow-soft: 0 24px 90px rgba(0, 0, 0, 0.34);
+      --shadow-card: 0 18px 55px rgba(0, 0, 0, 0.28);
+      --max: 1180px;
     }
+
     * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Manrope', 'Space Grotesk', 'Segoe UI', sans-serif;
-      color: #e2e8f0;
-      background: radial-gradient(circle at 20% 20%, rgba(124, 92, 249, 0.12), transparent 35%),
-                  radial-gradient(circle at 80% 0%, rgba(229, 73, 255, 0.10), transparent 30%),
-                  var(--ink);
+      font-family: Manrope, Inter, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 2%, rgba(78, 231, 255, 0.22), transparent 28rem),
+        radial-gradient(circle at 80% 10%, rgba(240, 77, 255, 0.20), transparent 32rem),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12), transparent 42rem),
+        linear-gradient(180deg, #080b18 0%, #0b1020 48%, #070a16 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    a { color: #c084fc; }
-    .shell {
-      max-width: 1100px;
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.72), transparent 78%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% -12%, rgba(255,255,255,0.16), transparent 40%);
+      mix-blend-mode: screen;
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    a {
+      color: #d8b4fe;
+      text-decoration-color: rgba(216, 180, 254, 0.45);
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      color: #f0abfc;
+    }
+
+    button, select, textarea {
+      font: inherit;
+    }
+
+    .page-shell {
+      width: min(var(--max), calc(100% - 40px));
       margin: 0 auto;
-      padding: 48px 20px 72px;
+      padding: 28px 0 80px;
     }
-    header {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-      padding: 28px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-      letter-spacing: -0.5px;
-    }
-    header p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 720px;
-      line-height: 1.5;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-top: 22px;
-    }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
-    .muted { color: var(--muted); }
-    ul, ol { margin: 8px 0 0 18px; padding: 0; line-height: 1.5; }
-    code, pre {
-      font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: #e5e7eb;
-    }
-    pre { padding: 14px; overflow-x: auto; }
-    .badge-row {
+
+    .topbar {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 38px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(7, 10, 22, 0.58);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.18);
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+    }
+
+    .brand {
+      display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 16px 14px;
-      border-radius: 10px;
-      background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
-      text-align: center;
-      margin: 2px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
     }
-    .badge-row img {
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #080b18;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(139, 92, 246, 0.36);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 9px 12px;
+      border-radius: 999px;
+      transition: color 0.18s ease, background 0.18s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-copy,
+    .hero-panel,
+    .section-card,
+    .embed-card,
+    .stat-card,
+    .badge-row {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.035));
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-copy {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      padding: clamp(30px, 5vw, 58px);
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: calc(var(--radius-xl) - 1px);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(78, 231, 255, 0.16), transparent 22rem),
+        radial-gradient(circle at 82% 12%, rgba(240, 77, 255, 0.20), transparent 28rem);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(139, 92, 246, 0.16);
+      border: 1px solid rgba(216, 180, 254, 0.24);
+      color: #e9d5ff;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 6px rgba(134, 239, 172, 0.13);
+    }
+
+    h1 {
+      margin: 28px 0 18px;
+      font-family: Inter, Manrope, sans-serif;
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: 0.94;
+      letter-spacing: -0.075em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 34%, #f0abfc 62%, #99f6e4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-lede {
+      margin: 0;
+      color: var(--text-soft);
+      max-width: 680px;
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.55;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .btn,
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 44px;
+      border-radius: 999px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+    }
+
+    .btn {
+      color: #070a16;
+      background: var(--accent);
+      box-shadow: 0 18px 34px rgba(139, 92, 246, 0.34);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      color: #070a16;
+      box-shadow: 0 22px 44px rgba(240, 77, 255, 0.28);
+    }
+
+    .secondary-btn {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--border);
+    }
+
+    .secondary-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.11);
+      color: var(--text);
+      border-color: var(--border-strong);
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .meta-pill {
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .meta-pill strong {
       display: block;
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .meta-pill span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .hero-panel {
+      border-radius: var(--radius-xl);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 540px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -100px;
+      top: -110px;
+      background: radial-gradient(circle, rgba(240, 77, 255, 0.24), transparent 70%);
+      pointer-events: none;
+    }
+
+    .usage-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.13), rgba(255,255,255,0.04));
+      border: 1px solid var(--border);
+    }
+
+    .usage-label {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 800;
+    }
+
+    #usageCount {
+      margin: 0;
+      font-family: Inter, Manrope, sans-serif;
+      font-size: clamp(46px, 9vw, 86px);
+      font-weight: 900;
+      letter-spacing: -0.07em;
+      line-height: 0.96;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .usage-card p:last-child {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .signal-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .signal {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(7, 10, 22, 0.36);
+    }
+
+    .signal-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(139, 92, 246, 0.17);
+      color: #f0abfc;
+      font-weight: 900;
+    }
+
+    .signal strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .signal span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .badge-preview-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .badge-preview-strip img {
       height: 20px;
       max-width: 100%;
     }
-    .badge-title {
-      font-weight: 600;
+
+    section {
+      scroll-margin-top: 94px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 54px 0 18px;
+    }
+
+    .section-kicker {
+      margin: 0 0 8px;
+      color: #c4b5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: Inter, Manrope, sans-serif;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: -0.055em;
+      line-height: 1.02;
+    }
+
+    .section-note {
+      max-width: 420px;
+      color: var(--muted);
+      line-height: 1.55;
       margin: 0;
     }
-    .badge-copy {
-      margin: 4px 0 0;
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .section-card,
+    .stat-card,
+    .embed-card {
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+
+    .section-card h3,
+    .embed-card h3,
+    .stat-card h3 {
+      margin: 0 0 10px;
+      font-family: Inter, Manrope, sans-serif;
+      font-size: 20px;
+      letter-spacing: -0.025em;
+    }
+
+    .section-card p,
+    .stat-card p,
+    .embed-card p {
+      margin: 0;
       color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .problem-card {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 22px;
+      align-items: center;
+      border-radius: var(--radius-xl);
+      padding: clamp(24px, 4vw, 40px);
+    }
+
+    .quote-box {
+      border: 1px solid rgba(216, 180, 254, 0.2);
+      border-left: 4px solid var(--violet);
+      border-radius: 22px;
+      padding: 22px;
+      background: rgba(139, 92, 246, 0.10);
+      color: var(--text-soft);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      counter-reset: steps;
+    }
+
+    .decision-card {
+      position: relative;
+      min-height: 220px;
+      overflow: hidden;
+    }
+
+    .decision-card::before {
+      counter-increment: steps;
+      content: "0" counter(steps);
+      position: absolute;
+      right: 18px;
+      top: 14px;
+      color: rgba(255, 255, 255, 0.08);
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -0.08em;
+    }
+
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .badge-row {
+      min-height: 148px;
+      align-items: flex-start;
+      justify-content: space-between;
+      text-align: left;
+      border-radius: 22px;
+      padding: 18px;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .badge-row:hover {
+      transform: translateY(-2px);
+      border-color: rgba(216, 180, 254, 0.34);
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.045));
+    }
+
+    .badge-row img {
+      height: 20px;
+      max-width: 100%;
+    }
+
+    .badge-title {
+      margin: 18px 0 6px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .badge-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
       font-size: 14px;
     }
-    .section-title {
-      margin: 42px 0 12px;
-      font-size: 22px;
-      letter-spacing: -0.2px;
+
+    .embed-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+      gap: 16px;
+      align-items: start;
     }
+
     .form-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin: 12px 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
     }
-    label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
-    select, textarea, input[type="text"] {
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--text-soft);
+      letter-spacing: 0.04em;
+    }
+
+    select,
+    textarea {
       width: 100%;
-      padding: 10px 12px;
-      border-radius: 8px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.06);
-      color: #e2e8f0;
-      font-family: 'Manrope', 'Space Grotesk', 'Segoe UI', sans-serif;
+      border-radius: 16px;
+      background: rgba(5, 8, 18, 0.64);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
+
     select {
+      min-height: 48px;
+      padding: 0 42px 0 14px;
       appearance: none;
-      background-image: linear-gradient(135deg, #7B5CF9 0%, #E549FF 100%);
-      color: #0b0b15;
-      font-weight: 700;
-      border: none;
-      padding-right: 42px;
-      position: relative;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #e9d5ff 50%),
+        linear-gradient(135deg, #e9d5ff 50%, transparent 50%);
+      background-position:
+        calc(100% - 19px) 20px,
+        calc(100% - 13px) 20px;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      font-weight: 800;
     }
+
     select option {
-      color: #0b0b15;
+      color: #0b1020;
       background: #eef2ff;
-      font-weight: 600;
     }
-    select:focus { outline: 2px solid #c084fc; outline-offset: 2px; }
-    textarea { min-height: 120px; resize: vertical; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: none;
-      border-radius: 10px;
-      padding: 10px 14px;
-      background: var(--accent);
-      color: #0b0b15;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 26px rgba(124, 92, 249, 0.35);
-      transition: transform 0.08s ease, box-shadow 0.12s ease;
+
+    textarea {
+      min-height: 150px;
+      padding: 14px;
+      resize: vertical;
+      font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.55;
     }
-    .btn:active { transform: translateY(1px); box-shadow: 0 6px 18px rgba(124, 92, 249, 0.25); }
+
+    select:focus,
+    textarea:focus,
+    .btn:focus-visible,
+    .secondary-btn:focus-visible,
+    .nav-links a:focus-visible {
+      border-color: rgba(216, 180, 254, 0.7);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.22);
+      outline: none;
+    }
+
     .preview {
       display: inline-flex;
       align-items: center;
       justify-content: flex-start;
+      min-height: 58px;
+      min-width: 260px;
+      padding: 16px;
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.045)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 8px, transparent 8px 16px);
+      border: 1px solid var(--border);
+    }
+
+    .preview img {
+      height: 24px;
+      max-width: 100%;
+    }
+
+    .button-row {
+      display: flex;
+      align-items: center;
       gap: 10px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+      flex-wrap: wrap;
+      margin-top: 14px;
     }
+
+    .button-row .btn {
+      min-height: 42px;
+      padding: 10px 15px;
+    }
+
     .toast {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(134, 239, 172, 0.12);
+      color: var(--green);
       font-size: 13px;
-      color: #86efac;
-      margin-left: 12px;
+      font-weight: 800;
       opacity: 0;
-      transition: opacity 0.2s ease;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .toast.show { opacity: 1; }
-    @media (max-width: 640px) {
-      header { padding: 20px; }
-      header h1 { font-size: 26px; }
-      .grid { grid-template-columns: 1fr; }
-      .badge-row { align-items: flex-start; text-align: left; }
-      .badge-row img { height: 24px; }
-      pre { font-size: 13px; }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
-    @media (max-width: 420px) {
-      body { padding: 0; }
-      .shell { padding: 28px 14px 56px; }
-      pre { white-space: pre-wrap; word-break: break-word; }
+
+    .howto-list {
+      margin: 14px 0 0 18px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .footer-note {
+      margin-top: 46px;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 980px) {
+      .topbar {
+        align-items: flex-start;
+        border-radius: 24px;
+      }
+
+      .hero,
+      .problem-card,
+      .embed-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-panel {
+        min-height: auto;
+      }
+
+      .grid,
+      .grid.two,
+      .decision-grid,
+      .badge-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page-shell {
+        width: min(100% - 28px, var(--max));
+        padding-top: 16px;
+      }
+
+      .topbar {
+        position: static;
+        display: grid;
+        border-radius: 22px;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .nav-links a {
+        padding: 8px 10px;
+      }
+
+      .hero-copy,
+      .hero-panel,
+      .section-card,
+      .embed-card,
+      .stat-card {
+        border-radius: 24px;
+        padding: 20px;
+      }
+
+      .hero-meta,
+      .grid,
+      .grid.two,
+      .decision-grid,
+      .badge-grid,
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        display: grid;
+        margin-top: 42px;
+      }
+
+      .preview {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+        animation-duration: 0.001ms !important;
+      }
     }
   </style>
 
@@ -208,510 +838,583 @@
   </script>
 </head>
 <body>
-  <div class="shell">
-    <header>
-      <h1>AI Attribution Badges</h1>
-      <p style="font-size: 18px; line-height: 1.5; margin: 12px 0 8px; color: #e2e8f0;">
-        Show stakeholders and teammates exactly how AI was involved in your work without awkward disclaimers or trust gaps.
-      </p>
-      <p class="muted" style="font-size: 15px;">
-        Drop a badge in your email, deck, or brief. Takes 30 seconds. Free forever. Used by marketing teams to build transparency.
-      </p>
-    </header>
-
-    <div style="text-align: center; margin: 28px 0 32px; padding: 20px; background: rgba(123, 92, 249, 0.05); border-radius: 12px; border: 1px solid rgba(123, 92, 249, 0.15);">
-      <p class="muted" style="margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600;">Total Badge Uses</p>
-      <p id="usageCount" style="margin: 0; font-size: 42px; font-weight: 700; background: linear-gradient(135deg, #7B5CF9, #E549FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;">
-        Loading...
-      </p>
-      <p class="muted" style="margin: 8px 0 0; font-size: 13px;">Badges copied and embedded across teams</p>
-    </div>
-
-    <section>
-      <h2 class="section-title">The Problem</h2>
-      <div class="card">
-        <p class="muted" style="margin: 0 0 16px; font-size: 15px; line-height: 1.6;">
-          You're using AI to draft campaign briefs, polish stakeholder emails, generate social copy, and speed up deck creation.
-          But when colleagues and leadership receive your work, they're left wondering:
-        </p>
-        <div style="background: rgba(255,255,255,0.03); border-left: 3px solid #7B5CF9; padding: 14px 18px; margin: 16px 0; border-radius: 6px;">
-          <p class="muted" style="margin: 0; font-style: italic;">
-            "Did AI write this campaign brief? Was this researched or generated? Can I trust these insights?
-            Should I verify this before presenting to leadership?"
-          </p>
-        </div>
-        <p class="muted" style="margin: 16px 0 0; font-size: 15px; line-height: 1.6;">
-          Marketing teams face unique pressure: stakeholder trust is everything. Without transparency, you're either writing paragraph-long
-          disclaimers that kill your flow, or saying nothing and risking credibility. <strong>There's no quick, professional way to signal
-          AI involvement</strong> that works across emails, decks, briefs, and campaign docs.
-        </p>
+  <div class="page-shell">
+    <nav class="topbar" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="AI Attribution Badges home">
+        <span class="brand-mark">AI</span>
+        <span>Attribution Badges</span>
+      </a>
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#guide">Guide</a>
+        <a href="#badges">Badges</a>
+        <a href="#embed">Embed</a>
       </div>
-    </section>
+    </nav>
 
-    <section>
-      <h2 class="section-title">The Solution</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>One Badge, Clear Signal</h3>
-          <p class="muted">Pick a badge that matches your workflow. Drop it in your email footer, slide deck, or document header. Done.</p>
-        </div>
-        <div class="card">
-          <h3>Process, Not Ownership</h3>
-          <p class="muted">These badges describe how the work was created, not who owns it or who's responsible. Just transparency about the process.</p>
-        </div>
-        <div class="card">
-          <h3>Instant Context</h3>
-          <p class="muted">Recipients see the involvement level immediately. No follow-up questions. No trust gaps. Just clear, upfront communication.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Why Marketing Teams Use This</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Build Stakeholder Trust</h3>
-          <p class="muted">Show leadership and teammates exactly how campaigns were created. Transparency strengthens collaboration and sets clear expectations from day one.</p>
-        </div>
-        <div class="card">
-          <h3>Speed Up Approvals</h3>
-          <p class="muted">Stakeholders know what to review. "AI Drafted • Human Edited" means they'll fact-check. "Human Original" means trust the strategy.</p>
-        </div>
-        <div class="card">
-          <h3>Professional Standard</h3>
-          <p class="muted">Skip awkward disclaimers. A small badge in your email signature or deck footer signals transparency without breaking your brand voice.</p>
-        </div>
-      </div>
-    </section>
-
-    <section style="background: linear-gradient(135deg, rgba(123, 92, 249, 0.08), rgba(229, 73, 255, 0.06)); border: 1px solid rgba(123, 92, 249, 0.2); border-radius: 12px; padding: 32px 28px; margin-top: 32px;">
-      <h2 style="margin: 0 0 16px; font-size: 24px;">Try It Now: 30-Second Setup</h2>
-      <p class="muted" style="margin: 0 0 20px; font-size: 15px; line-height: 1.6;">
-        Test a badge in your next email. Pick one below, copy the code, paste in your signature. That's it.
-      </p>
-      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-        <a href="#embed" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border-radius: 10px; padding: 12px 20px; background: linear-gradient(135deg, #7B5CF9, #E549FF); color: #0b0b15; font-weight: 700; box-shadow: 0 10px 26px rgba(124, 92, 249, 0.35); transition: transform 0.08s ease;">
-          Get Your First Badge →
-        </a>
-        <span class="muted" style="font-size: 14px;">No signup. No install. Free forever.</span>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">How to Use</h2>
-      <div class="grid" style="grid-template-columns: 1fr 1fr;">
-        <div class="card">
-          <h3 style="margin-bottom: 12px;">Quick Guidelines</h3>
-          <ul style="margin: 0; padding-left: 18px; line-height: 1.7;">
-            <li>One badge per artifact, such as email, deck, doc, or FAQ</li>
-            <li>Choose the highest AI involvement that occurred</li>
-            <li>When unsure, use <strong>Human–AI Co-Created</strong></li>
-            <li>Place where people see it first</li>
-            <li>Keep it attached when sharing</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3 style="margin-bottom: 12px;">Best Practices</h3>
-          <ul style="margin: 0; padding-left: 18px; line-height: 1.7;">
-            <li>Email: signature or footer</li>
-            <li>Slides: title slide or footer</li>
-            <li>Documents: cover page or header</li>
-            <li>Always include alt text for accessibility</li>
-            <li>Use SVG for web, PNG for email and slides</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Which Badge Should I Use?</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>No AI wrote content</h3>
-          <p class="muted">Use <strong>Human Original</strong>, <strong>Human Original • AI Polished</strong>, or <strong>Human Written • AI Reviewed</strong>.</p>
-        </div>
-        <div class="card">
-          <h3>AI helped generate options</h3>
-          <p class="muted">Use <strong>AI Suggested • Human Approved</strong> or <strong>Human Curated</strong> when a human selected and shaped the final result.</p>
-        </div>
-        <div class="card">
-          <h3>AI wrote meaningful text</h3>
-          <p class="muted">Use <strong>Human–AI Co-Created</strong>, <strong>AI Drafted • Human Edited</strong>, <strong>AI Drafted</strong>, or <strong>AI Generated</strong>.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Badges</h2>
-      <div class="grid" id="badgeGrid"></div>
-    </section>
-
-    <section id="embed">
-      <h2 class="section-title">Embed</h2>
-      <div class="card" style="margin-bottom:18px;">
-        <h3>Badge Picker &amp; Copy Helper</h3>
-        <div class="form-row">
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
           <div>
-            <label for="badgeSelect">Badge</label>
-            <select id="badgeSelect"></select>
+            <div class="eyebrow"><span class="eyebrow-dot"></span> Transparent AI usage</div>
+            <h1 id="hero-title"><span class="gradient-text">Signal how AI helped.</span><br>Keep trust intact.</h1>
+            <p class="hero-lede">
+              A standardized badge system for showing how AI contributed to emails, briefs, decks, reports, and customer-facing content.
+            </p>
+            <div class="hero-actions">
+              <a class="btn" href="#embed">Create a badge</a>
+              <a class="secondary-btn" href="#guide">Choose the right label</a>
+            </div>
           </div>
-          <div>
-            <label for="formatSelect">Format</label>
-            <select id="formatSelect">
-              <option value="email">Email footer (PNG, safest)</option>
-              <option value="svg-md">Markdown (SVG)</option>
-              <option value="svg-html">HTML IMG (SVG)</option>
-              <option value="png1-html">HTML IMG (PNG 1x)</option>
-              <option value="png2-html">HTML IMG (PNG 2x, render at 20px)</option>
-              <option value="sprite">SVG Sprite &lt;use&gt;</option>
-            </select>
-          </div>
-        </div>
-        <div style="margin: 12px 0;">
-          <label>Preview</label>
-          <div class="preview">
-            <img id="badgePreview" src="" alt="Badge preview" height="24">
-          </div>
-        </div>
-        <div style="margin: 12px 0;">
-          <label for="snippet">Code to paste</label>
-          <textarea id="snippet" readonly></textarea>
-        </div>
-        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-          <button class="btn" id="copyBtn" type="button">Copy</button>
-          <button class="btn" id="copyImgBtn" type="button">Copy badge PNG</button>
-          <button class="btn" id="copySvgBtn" type="button">Copy badge SVG</button>
-          <span class="toast" id="toast">Copied</span>
-        </div>
-      </div>
 
-      <div class="card" style="margin-bottom:18px;">
-        <h3>How to add to Outlook (Windows desktop)</h3>
-        <ol style="margin: 8px 0 0 18px; padding: 0; line-height: 1.5; color: var(--muted);">
-          <li>Pick the badge and format above, choose “Email footer (PNG, safest)”, then click Copy.</li>
-          <li>In Outlook: File → Options → Mail → Signatures → Edit your signature.</li>
-          <li>Place the cursor where you want the badge and paste the copied footer.</li>
-          <li>If Outlook blocks the footer HTML, click “Copy badge PNG” and insert the image manually.</li>
-          <li>Send yourself a test email to verify the badge renders and the alt text is useful when images are blocked.</li>
-        </ol>
-      </div>
-    </section>
+          <div class="hero-meta" aria-label="Project highlights">
+            <div class="meta-pill">
+              <strong>9 levels</strong>
+              <span>From human original to AI generated</span>
+            </div>
+            <div class="meta-pill">
+              <strong>30 seconds</strong>
+              <span>Pick, copy, paste into your artifact</span>
+            </div>
+            <div class="meta-pill">
+              <strong>Portable</strong>
+              <span>SVG, PNG, Markdown, HTML, email</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="Badge usage summary">
+          <div class="usage-card">
+            <p class="usage-label">Total badge uses</p>
+            <p id="usageCount">Loading...</p>
+            <p>Badges copied and embedded across teams.</p>
+          </div>
+
+          <div class="signal-stack">
+            <div class="signal">
+              <div class="signal-icon">1</div>
+              <div>
+                <strong>Process disclosure</strong>
+                <span>Badges describe how work was made, not who owns or approves it.</span>
+              </div>
+            </div>
+            <div class="signal">
+              <div class="signal-icon">2</div>
+              <div>
+                <strong>Fast stakeholder context</strong>
+                <span>Recipients know whether to polish, fact-check, review, or trust the source.</span>
+              </div>
+            </div>
+            <div class="signal">
+              <div class="signal-icon">3</div>
+              <div>
+                <strong>Works where teams work</strong>
+                <span>Designed for email signatures, docs, decks, briefs, and knowledge bases.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="badge-preview-strip" aria-label="Example badges">
+            <img src="badges/svg/human-original-ai-polished.svg?v=v5" alt="Human Original • AI Polished badge">
+            <img src="badges/svg/human-ai-co-created.svg?v=v5" alt="Human–AI Co-Created badge">
+            <img src="badges/svg/ai-drafted-human-edited.svg?v=v5" alt="AI Drafted • Human Edited badge">
+          </div>
+        </aside>
+      </section>
+
+      <section id="problem" aria-labelledby="problem-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">The trust gap</p>
+            <h2 class="section-title" id="problem-title">AI use is normal. Disclosure still feels awkward.</h2>
+          </div>
+          <p class="section-note">The badge gives teams a lightweight signal that travels with the work.</p>
+        </div>
+
+        <div class="section-card problem-card">
+          <div>
+            <p>
+              Marketing teams use AI to draft campaign briefs, polish stakeholder emails, generate social copy, and speed up deck creation. Without a shared signal, recipients are left guessing how much AI was involved and what level of review is needed.
+            </p>
+          </div>
+          <div class="quote-box">
+            "Did AI write this campaign brief? Was this researched or generated? Can I trust these insights? Should I verify this before presenting to leadership?"
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="solution-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">The solution</p>
+            <h2 class="section-title" id="solution-title">A small badge with a clear job.</h2>
+          </div>
+          <p class="section-note">Use one badge per artifact and choose the highest level of AI involvement that occurred.</p>
+        </div>
+
+        <div class="grid">
+          <div class="section-card">
+            <h3>One Badge, Clear Signal</h3>
+            <p>Pick a badge that matches your workflow. Drop it in your email footer, slide deck, or document header.</p>
+          </div>
+          <div class="section-card">
+            <h3>Process, Not Ownership</h3>
+            <p>These badges describe how the work was created, not who owns it or who is responsible for the final result.</p>
+          </div>
+          <div class="section-card">
+            <h3>Instant Context</h3>
+            <p>Recipients see the involvement level immediately. No paragraph-long disclaimers and no trust gap.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="why-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Why teams use it</p>
+            <h2 class="section-title" id="why-title">Built for practical workplace adoption.</h2>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="section-card">
+            <h3>Build Stakeholder Trust</h3>
+            <p>Show leadership and teammates how campaigns were created. Transparency strengthens collaboration from the start.</p>
+          </div>
+          <div class="section-card">
+            <h3>Speed Up Approvals</h3>
+            <p>Stakeholders know what to review. AI Drafted • Human Edited means fact-check. Human Original means trust the strategy.</p>
+          </div>
+          <div class="section-card">
+            <h3>Set a Standard</h3>
+            <p>A small badge in a signature, footer, or cover page signals transparency without changing the voice of the work.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="guide" aria-labelledby="guide-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Decision guide</p>
+            <h2 class="section-title" id="guide-title">Choose the right badge in one pass.</h2>
+          </div>
+          <p class="section-note">Start with the highest level of AI involvement. When unsure, use Human–AI Co-Created.</p>
+        </div>
+
+        <div class="decision-grid">
+          <div class="section-card decision-card">
+            <h3>No AI wrote content</h3>
+            <p>Use Human Original, Human Original • AI Polished, or Human Written • AI Reviewed.</p>
+          </div>
+          <div class="section-card decision-card">
+            <h3>AI helped generate options</h3>
+            <p>Use AI Suggested • Human Approved or Human Curated when a human selected and shaped the result.</p>
+          </div>
+          <div class="section-card decision-card">
+            <h3>AI wrote meaningful text</h3>
+            <p>Use Human–AI Co-Created, AI Drafted • Human Edited, AI Drafted, or AI Generated.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="badges" aria-labelledby="badges-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Badge set</p>
+            <h2 class="section-title" id="badges-title">Nine labels, ordered by involvement.</h2>
+          </div>
+          <p class="section-note">The grid is generated from the badge manifest so design, picker, and docs stay aligned.</p>
+        </div>
+        <div class="badge-grid" id="badgeGrid"></div>
+      </section>
+
+      <section id="embed" aria-labelledby="embed-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Embed lab</p>
+            <h2 class="section-title" id="embed-title">Pick a badge and copy the right format.</h2>
+          </div>
+          <p class="section-note">PNG is the safest default for email. SVG remains best for web and docs that support it.</p>
+        </div>
+
+        <div class="embed-layout">
+          <div class="embed-card">
+            <h3>Badge Picker &amp; Copy Helper</h3>
+            <p>Choose a label, pick a format, then copy the snippet or image.</p>
+            <div class="form-row">
+              <div>
+                <label for="badgeSelect">Badge</label>
+                <select id="badgeSelect"></select>
+              </div>
+              <div>
+                <label for="formatSelect">Format</label>
+                <select id="formatSelect">
+                  <option value="email">Email footer (PNG, safest)</option>
+                  <option value="svg-md">Markdown (SVG)</option>
+                  <option value="svg-html">HTML IMG (SVG)</option>
+                  <option value="png1-html">HTML IMG (PNG 1x)</option>
+                  <option value="png2-html">HTML IMG (PNG 2x, render at 20px)</option>
+                  <option value="sprite">SVG Sprite &lt;use&gt;</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin: 18px 0;">
+              <label>Preview</label>
+              <div class="preview">
+                <img id="badgePreview" src="" alt="Badge preview" height="24">
+              </div>
+            </div>
+
+            <div style="margin: 18px 0;">
+              <label for="snippet">Code to paste</label>
+              <textarea id="snippet" readonly></textarea>
+            </div>
+
+            <div class="button-row">
+              <button class="btn" id="copyBtn" type="button">Copy code</button>
+              <button class="secondary-btn" id="copyImgBtn" type="button">Copy PNG</button>
+              <button class="secondary-btn" id="copySvgBtn" type="button">Copy SVG</button>
+              <span class="toast" id="toast">Copied</span>
+            </div>
+          </div>
+
+          <aside class="embed-card">
+            <h3>How to add to Outlook</h3>
+            <p>Use the PNG footer for the best compatibility with Windows desktop and corporate email clients.</p>
+            <ol class="howto-list">
+              <li>Choose “Email footer (PNG, safest)”.</li>
+              <li>Click “Copy code”.</li>
+              <li>Open Outlook: File, Options, Mail, Signatures.</li>
+              <li>Paste the footer into your signature.</li>
+              <li>If HTML is blocked, use “Copy PNG” and insert the image manually.</li>
+              <li>Send yourself a test email to confirm rendering and alt text.</li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+
+      <p class="footer-note">
+        AI Attribution Badges describe creation process only. Final accountability still belongs to the person or team publishing the work.
+      </p>
+    </main>
   </div>
-</body>
-<script>
-  const ASSET_VERSION = "v5";
-  const TOTAL_BADGE_USES = 45;
-  const ANALYTICS_API_ENDPOINT = '/api/badge-count';
 
-  const BADGE_FALLBACKS = [
-    { slug: "human-original", label: "Human Original", description: "Created without AI assistance.", path: "badges/svg/human-original.svg", png1x: "badges/png/1x/human-original.png", png2x: "badges/png/2x/human-original.png" },
-    { slug: "human-original-ai-polished", label: "Human Original • AI Polished", description: "Human wrote it. AI only refined grammar, tone, or clarity.", path: "badges/svg/human-original-ai-polished.svg", png1x: "badges/png/1x/human-original-ai-polished.png", png2x: "badges/png/2x/human-original-ai-polished.png" },
-    { slug: "human-written-ai-reviewed", label: "Human Written • AI Reviewed", description: "Human authored it. AI was used for review or quality checks only.", path: "badges/svg/human-written-ai-reviewed.svg", png1x: "badges/png/1x/human-written-ai-reviewed.png", png2x: "badges/png/2x/human-written-ai-reviewed.png" },
-    { slug: "ai-suggested-human-approved", label: "AI Suggested • Human Approved", description: "AI proposed options. A human selected and lightly adjusted them.", path: "badges/svg/ai-suggested-human-approved.svg", png1x: "badges/png/1x/ai-suggested-human-approved.png", png2x: "badges/png/2x/ai-suggested-human-approved.png" },
-    { slug: "human-curated", label: "Human Curated", description: "Human selected, arranged, or evaluated AI outputs from multiple candidates.", path: "badges/svg/human-curated.svg", png1x: "badges/png/1x/human-curated.png", png2x: "badges/png/2x/human-curated.png" },
-    { slug: "human-ai-co-created", label: "Human–AI Co-Created", description: "Human and AI collaborated iteratively on ideas, structure, and wording.", path: "badges/svg/human-ai-co-created.svg", png1x: "badges/png/1x/human-ai-co-created.png", png2x: "badges/png/2x/human-ai-co-created.png" },
-    { slug: "ai-drafted-human-edited", label: "AI Drafted • Human Edited", description: "AI produced the first draft. A human substantively edited or fact-checked it.", path: "badges/svg/ai-drafted-human-edited.svg", png1x: "badges/png/1x/ai-drafted-human-edited.png", png2x: "badges/png/2x/ai-drafted-human-edited.png" },
-    { slug: "ai-drafted", label: "AI Drafted", description: "AI produced the first draft with minimal human edits.", path: "badges/svg/ai-drafted.svg", png1x: "badges/png/1x/ai-drafted.png", png2x: "badges/png/2x/ai-drafted.png" },
-    { slug: "ai-generated", label: "AI Generated", description: "AI produced the final artifact with no meaningful human edits.", path: "badges/svg/ai-generated.svg", png1x: "badges/png/1x/ai-generated.png", png2x: "badges/png/2x/ai-generated.png" }
-  ];
+  <script>
+    const ASSET_VERSION = "v6";
+    const TOTAL_BADGE_USES = 45;
+    const ANALYTICS_API_ENDPOINT = '/api/badge-count';
 
-  let badges = [...BADGE_FALLBACKS];
+    const BADGE_FALLBACKS = [
+      { slug: "human-original", label: "Human Original", description: "Created without AI assistance.", path: "badges/svg/human-original.svg", png1x: "badges/png/1x/human-original.png", png2x: "badges/png/2x/human-original.png" },
+      { slug: "human-original-ai-polished", label: "Human Original • AI Polished", description: "Human wrote it. AI only refined grammar, tone, or clarity.", path: "badges/svg/human-original-ai-polished.svg", png1x: "badges/png/1x/human-original-ai-polished.png", png2x: "badges/png/2x/human-original-ai-polished.png" },
+      { slug: "human-written-ai-reviewed", label: "Human Written • AI Reviewed", description: "Human authored it. AI was used for review or quality checks only.", path: "badges/svg/human-written-ai-reviewed.svg", png1x: "badges/png/1x/human-written-ai-reviewed.png", png2x: "badges/png/2x/human-written-ai-reviewed.png" },
+      { slug: "ai-suggested-human-approved", label: "AI Suggested • Human Approved", description: "AI proposed options. A human selected and lightly adjusted them.", path: "badges/svg/ai-suggested-human-approved.svg", png1x: "badges/png/1x/ai-suggested-human-approved.png", png2x: "badges/png/2x/ai-suggested-human-approved.png" },
+      { slug: "human-curated", label: "Human Curated", description: "Human selected, arranged, or evaluated AI outputs from multiple candidates.", path: "badges/svg/human-curated.svg", png1x: "badges/png/1x/human-curated.png", png2x: "badges/png/2x/human-curated.png" },
+      { slug: "human-ai-co-created", label: "Human–AI Co-Created", description: "Human and AI collaborated iteratively on ideas, structure, and wording.", path: "badges/svg/human-ai-co-created.svg", png1x: "badges/png/1x/human-ai-co-created.png", png2x: "badges/png/2x/human-ai-co-created.png" },
+      { slug: "ai-drafted-human-edited", label: "AI Drafted • Human Edited", description: "AI produced the first draft. A human substantively edited or fact-checked it.", path: "badges/svg/ai-drafted-human-edited.svg", png1x: "badges/png/1x/ai-drafted-human-edited.png", png2x: "badges/png/2x/ai-drafted-human-edited.png" },
+      { slug: "ai-drafted", label: "AI Drafted", description: "AI produced the first draft with minimal human edits.", path: "badges/svg/ai-drafted.svg", png1x: "badges/png/1x/ai-drafted.png", png2x: "badges/png/2x/ai-drafted.png" },
+      { slug: "ai-generated", label: "AI Generated", description: "AI produced the final artifact with no meaningful human edits.", path: "badges/svg/ai-generated.svg", png1x: "badges/png/1x/ai-generated.png", png2x: "badges/png/2x/ai-generated.png" }
+    ];
 
-  const badgeSelect = document.getElementById("badgeSelect");
-  const formatSelect = document.getElementById("formatSelect");
-  const preview = document.getElementById("badgePreview");
-  const snippet = document.getElementById("snippet");
-  const toast = document.getElementById("toast");
-  const copyBtn = document.getElementById("copyBtn");
-  const copyImgBtn = document.getElementById("copyImgBtn");
-  const copySvgBtn = document.getElementById("copySvgBtn");
-  const badgeGrid = document.getElementById("badgeGrid");
+    let badges = [...BADGE_FALLBACKS];
 
-  function escapeHtml(value) {
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
+    const badgeSelect = document.getElementById("badgeSelect");
+    const formatSelect = document.getElementById("formatSelect");
+    const preview = document.getElementById("badgePreview");
+    const snippet = document.getElementById("snippet");
+    const toast = document.getElementById("toast");
+    const copyBtn = document.getElementById("copyBtn");
+    const copyImgBtn = document.getElementById("copyImgBtn");
+    const copySvgBtn = document.getElementById("copySvgBtn");
+    const badgeGrid = document.getElementById("badgeGrid");
 
-  function withV(path) {
-    const url = new URL(path, window.location.href);
-    url.searchParams.set("v", ASSET_VERSION);
-    return url.href;
-  }
-
-  async function loadBadges() {
-    try {
-      const response = await fetch(withV("badges/index.json"), {
-        method: "GET",
-        headers: { "Accept": "application/json" },
-        cache: "no-cache"
-      });
-      if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
-      const data = await response.json();
-      if (Array.isArray(data.badges) && data.badges.length > 0) {
-        badges = data.badges.map(badge => ({
-          ...badge,
-          path: badge.path || badge.svg || `badges/svg/${badge.slug}.svg`,
-          png1x: badge.png1x || `badges/png/1x/${badge.slug}.png`,
-          png2x: badge.png2x || `badges/png/2x/${badge.slug}.png`,
-          description: badge.description || "AI usage disclosure badge."
-        }));
-      }
-    } catch (error) {
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.warn('[Badges] Using fallback badge manifest:', error.message);
-      }
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
 
-    renderBadgeGrid();
-    populateBadgeSelect();
-    badgeSelect.value = badges[0]?.slug || "";
-    updateUI();
-  }
-
-  function renderBadgeGrid() {
-    badgeGrid.innerHTML = badges.map(badge => `
-      <div class="badge-row">
-        <img src="${withV(badge.path)}" alt="${escapeHtml(badge.label)} badge">
-        <div>
-          <p class="badge-title">${escapeHtml(badge.label)}</p>
-          <p class="badge-copy">${escapeHtml(badge.description)}</p>
-        </div>
-      </div>
-    `).join("");
-  }
-
-  function populateBadgeSelect() {
-    badgeSelect.innerHTML = "";
-    badges.forEach(badge => {
-      const opt = document.createElement("option");
-      opt.value = badge.slug;
-      opt.textContent = badge.label;
-      badgeSelect.appendChild(opt);
-    });
-  }
-
-  function formatMagnitude(num) {
-    if (num < 1000) return num.toString();
-    if (num < 10000) return (num / 1000).toFixed(1).replace('.0', '') + 'k';
-    if (num < 1000000) return Math.floor(num / 1000) + 'k';
-    if (num < 10000000) return (num / 1000000).toFixed(1).replace('.0', '') + 'M';
-    if (num < 1000000000) return Math.floor(num / 1000000) + 'M';
-    return (num / 1000000000).toFixed(1).replace('.0', '') + 'B';
-  }
-
-  async function updateUsageCounter() {
-    const counterEl = document.getElementById('usageCount');
-    if (!counterEl) return;
-
-    let totalUses = TOTAL_BADGE_USES;
-
-    try {
-      const response = await fetch(ANALYTICS_API_ENDPOINT, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json' },
-        cache: 'no-cache'
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        const count = Number(data.count);
-        if (Number.isFinite(count)) {
-          totalUses = count;
-          if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            console.log('[Analytics] Live count fetched:', totalUses);
-          }
-        }
-      } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.warn('[Analytics] API returned error:', response.status);
-      }
-    } catch (error) {
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.warn('[Analytics] Failed to fetch live count, using fallback:', error.message);
-      }
+    function withV(path) {
+      const url = new URL(path, window.location.href);
+      url.searchParams.set("v", ASSET_VERSION);
+      return url.href;
     }
 
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    async function loadBadges() {
       try {
-        const localStats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
-        const localCount = Object.keys(localStats)
-          .filter(k => k.startsWith('code_copied_') || k.startsWith('image_copied_'))
-          .reduce((sum, key) => sum + (localStats[key] || 0), 0);
-        totalUses += localCount;
+        const response = await fetch(withV("badges/index.json"), {
+          method: "GET",
+          headers: { "Accept": "application/json" },
+          cache: "no-cache"
+        });
+        if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
+        const data = await response.json();
+        if (Array.isArray(data.badges) && data.badges.length > 0) {
+          badges = data.badges.map(badge => ({
+            ...badge,
+            path: badge.path || badge.svg || `badges/svg/${badge.slug}.svg`,
+            png1x: badge.png1x || `badges/png/1x/${badge.slug}.png`,
+            png2x: badge.png2x || `badges/png/2x/${badge.slug}.png`,
+            description: badge.description || "AI usage disclosure badge."
+          }));
+        }
+      } catch (error) {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.warn('[Badges] Using fallback badge manifest:', error.message);
+        }
+      }
+
+      renderBadgeGrid();
+      populateBadgeSelect();
+      badgeSelect.value = badges[0]?.slug || "";
+      updateUI();
+    }
+
+    function renderBadgeGrid() {
+      badgeGrid.innerHTML = badges.map(badge => `
+        <div class="badge-row">
+          <img src="${withV(badge.path)}" alt="${escapeHtml(badge.label)} badge">
+          <div>
+            <p class="badge-title">${escapeHtml(badge.label)}</p>
+            <p class="badge-copy">${escapeHtml(badge.description)}</p>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function populateBadgeSelect() {
+      badgeSelect.innerHTML = "";
+      badges.forEach(badge => {
+        const opt = document.createElement("option");
+        opt.value = badge.slug;
+        opt.textContent = badge.label;
+        badgeSelect.appendChild(opt);
+      });
+    }
+
+    function formatMagnitude(num) {
+      if (num < 1000) return num.toString();
+      if (num < 10000) return (num / 1000).toFixed(1).replace('.0', '') + 'k';
+      if (num < 1000000) return Math.floor(num / 1000) + 'k';
+      if (num < 10000000) return (num / 1000000).toFixed(1).replace('.0', '') + 'M';
+      if (num < 1000000000) return Math.floor(num / 1000000) + 'M';
+      return (num / 1000000000).toFixed(1).replace('.0', '') + 'B';
+    }
+
+    async function updateUsageCounter() {
+      const counterEl = document.getElementById('usageCount');
+      if (!counterEl) return;
+
+      let totalUses = TOTAL_BADGE_USES;
+
+      try {
+        const response = await fetch(ANALYTICS_API_ENDPOINT, {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' },
+          cache: 'no-cache'
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const count = Number(data.count);
+          if (Number.isFinite(count)) {
+            totalUses = count;
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+              console.log('[Analytics] Live count fetched:', totalUses);
+            }
+          }
+        } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.warn('[Analytics] API returned error:', response.status);
+        }
+      } catch (error) {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.warn('[Analytics] Failed to fetch live count, using fallback:', error.message);
+        }
+      }
+
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        try {
+          const localStats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
+          const localCount = Object.keys(localStats)
+            .filter(k => k.startsWith('code_copied_') || k.startsWith('image_copied_'))
+            .reduce((sum, key) => sum + (localStats[key] || 0), 0);
+          totalUses += localCount;
+        } catch (e) {
+          // Ignore localStorage errors.
+        }
+      }
+
+      counterEl.textContent = formatMagnitude(totalUses);
+    }
+
+    function trackEvent(action, properties = {}) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', action, properties);
+      }
+      if (typeof plausible !== 'undefined') {
+        plausible(action, { props: properties });
+      }
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.log('[Analytics]', action, properties);
+      }
+
+      try {
+        const stats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
+        const key = `${action}_${properties.badge || 'unknown'}`;
+        stats[key] = (stats[key] || 0) + 1;
+        stats.lastTracked = new Date().toISOString();
+        localStorage.setItem('badge-stats', JSON.stringify(stats));
+
+        if (action === 'code_copied' || action === 'image_copied') {
+          updateUsageCounter();
+        }
       } catch (e) {
-        // Ignore localStorage errors.
+        // Silent fail if localStorage is unavailable.
       }
     }
 
-    counterEl.textContent = formatMagnitude(totalUses);
-  }
-
-  function trackEvent(action, properties = {}) {
-    if (typeof gtag !== 'undefined') {
-      gtag('event', action, properties);
-    }
-    if (typeof plausible !== 'undefined') {
-      plausible(action, { props: properties });
-    }
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      console.log('[Analytics]', action, properties);
-    }
-
-    try {
-      const stats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
-      const key = `${action}_${properties.badge || 'unknown'}`;
-      stats[key] = (stats[key] || 0) + 1;
-      stats.lastTracked = new Date().toISOString();
-      localStorage.setItem('badge-stats', JSON.stringify(stats));
-
-      if (action === 'code_copied' || action === 'image_copied') {
-        updateUsageCounter();
+    window.getBadgeStats = function() {
+      try {
+        const stats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
+        console.table(stats);
+        return stats;
+      } catch (e) {
+        console.error('Failed to retrieve badge stats:', e);
+        return {};
       }
-    } catch (e) {
-      // Silent fail if localStorage is unavailable.
+    };
+
+    function getSelectedBadge() {
+      return badges.find(badge => badge.slug === badgeSelect.value) || badges[0];
     }
-  }
 
-  window.getBadgeStats = function() {
-    try {
-      const stats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
-      console.table(stats);
-      return stats;
-    } catch (e) {
-      console.error('Failed to retrieve badge stats:', e);
-      return {};
-    }
-  };
+    function buildSnippet(badge, fmt) {
+      const svgUrl = withV(badge.path || `badges/svg/${badge.slug}.svg`);
+      const png1 = withV(badge.png1x || `badges/png/1x/${badge.slug}.png`);
+      const png2 = withV(badge.png2x || `badges/png/2x/${badge.slug}.png`);
+      const sprite = withV(`sprites/sprite.svg#${badge.slug}`);
+      const label = badge.label;
 
-  function getSelectedBadge() {
-    return badges.find(badge => badge.slug === badgeSelect.value) || badges[0];
-  }
-
-  function buildSnippet(badge, fmt) {
-    const svgUrl = withV(badge.path || `badges/svg/${badge.slug}.svg`);
-    const png1 = withV(badge.png1x || `badges/png/1x/${badge.slug}.png`);
-    const png2 = withV(badge.png2x || `badges/png/2x/${badge.slug}.png`);
-    const sprite = withV(`sprites/sprite.svg#${badge.slug}`);
-    const label = badge.label;
-
-    switch (fmt) {
-      case "svg-md":
-        return `![${label}](${svgUrl})`;
-      case "svg-html":
-        return `<img src="${svgUrl}" alt="${label}" height="20">`;
-      case "png1-html":
-        return `<img src="${png1}" alt="${label}" height="20">`;
-      case "png2-html":
-        return `<img src="${png2}" alt="${label}" height="20">`;
-      case "email":
-        return `<div style="font-family:'Segoe UI',Arial,sans-serif;font-size:13px;line-height:18px;">
+      switch (fmt) {
+        case "svg-md":
+          return `![${label}](${svgUrl})`;
+        case "svg-html":
+          return `<img src="${svgUrl}" alt="${label}" height="20">`;
+        case "png1-html":
+          return `<img src="${png1}" alt="${label}" height="20">`;
+        case "png2-html":
+          return `<img src="${png2}" alt="${label}" height="20">`;
+        case "email":
+          return `<div style="font-family:'Segoe UI',Arial,sans-serif;font-size:13px;line-height:18px;">
   <strong>AI Disclosure:</strong><br>
   <img src="${png2}" alt="${label}" height="20" style="height:20px;width:auto;vertical-align:middle;border:none;">
 </div>`;
-      case "sprite":
-        return `<svg role="img" aria-label="${label}" height="20">
+        case "sprite":
+          return `<svg role="img" aria-label="${label}" height="20">
   <use href="${sprite}" />
 </svg>`;
-      default:
-        return "";
-    }
-  }
-
-  function updateUI() {
-    const badge = getSelectedBadge();
-    if (!badge) return;
-    const fmt = formatSelect.value;
-
-    preview.src = withV(badge.path || `badges/svg/${badge.slug}.svg`);
-    preview.alt = badge.label;
-    snippet.value = buildSnippet(badge, fmt);
-  }
-
-  badgeSelect.addEventListener("change", () => {
-    const badge = getSelectedBadge();
-    trackEvent('badge_selected', { badge: badge.slug, label: badge.label });
-    updateUI();
-  });
-
-  formatSelect.addEventListener("change", () => {
-    const badge = getSelectedBadge();
-    trackEvent('format_changed', { badge: badge.slug, format: formatSelect.value });
-    updateUI();
-  });
-
-  copyBtn.addEventListener("click", async () => {
-    const badge = getSelectedBadge();
-    try {
-      await navigator.clipboard.writeText(snippet.value);
-      trackEvent('code_copied', { badge: badge.slug, label: badge.label, format: formatSelect.value });
-      showToast("Copied");
-    } catch (err) {
-      showToast("Copy failed", 2000);
-    }
-  });
-
-  copyImgBtn.addEventListener("click", async () => {
-    const badge = getSelectedBadge();
-    const pngUrl = withV(badge.png2x || `badges/png/2x/${badge.slug}.png`);
-    const fallbackOpen = () => {
-      window.open(pngUrl, "_blank", "noopener");
-      showToast("Clipboard blocked; opened image to copy manually", 2200);
-    };
-
-    if (!isSecureContext || typeof ClipboardItem === "undefined" || !navigator.clipboard?.write) {
-      fallbackOpen();
-      return;
+        default:
+          return "";
+      }
     }
 
-    try {
-      const res = await fetch(pngUrl);
-      if (!res.ok) throw new Error(`Image request failed: ${res.status}`);
-      const blob = await res.blob();
-      const item = new ClipboardItem({ [blob.type || 'image/png']: blob });
-      await navigator.clipboard.write([item]);
-      trackEvent('image_copied', { badge: badge.slug, label: badge.label, format: 'png' });
-      showToast("Badge image copied");
-    } catch (err) {
-      fallbackOpen();
-    }
-  });
+    function updateUI() {
+      const badge = getSelectedBadge();
+      if (!badge) return;
+      const fmt = formatSelect.value;
 
-  copySvgBtn.addEventListener("click", async () => {
-    const badge = getSelectedBadge();
-    const svgUrl = withV(badge.path || `badges/svg/${badge.slug}.svg`);
-    const fallbackOpen = () => {
-      window.open(svgUrl, "_blank", "noopener");
-      showToast("Clipboard blocked; opened SVG to copy manually", 2200);
-    };
-
-    if (!isSecureContext || typeof ClipboardItem === "undefined" || !navigator.clipboard?.write) {
-      fallbackOpen();
-      return;
+      preview.src = withV(badge.path || `badges/svg/${badge.slug}.svg`);
+      preview.alt = badge.label;
+      snippet.value = buildSnippet(badge, fmt);
     }
 
-    try {
-      const res = await fetch(svgUrl);
-      if (!res.ok) throw new Error(`SVG request failed: ${res.status}`);
-      const blob = await res.blob();
-      const item = new ClipboardItem({ [blob.type || 'image/svg+xml']: blob });
-      await navigator.clipboard.write([item]);
-      trackEvent('image_copied', { badge: badge.slug, label: badge.label, format: 'svg' });
-      showToast("Badge SVG copied");
-    } catch (err) {
-      fallbackOpen();
+    badgeSelect.addEventListener("change", () => {
+      const badge = getSelectedBadge();
+      trackEvent('badge_selected', { badge: badge.slug, label: badge.label });
+      updateUI();
+    });
+
+    formatSelect.addEventListener("change", () => {
+      const badge = getSelectedBadge();
+      trackEvent('format_changed', { badge: badge.slug, format: formatSelect.value });
+      updateUI();
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      const badge = getSelectedBadge();
+      try {
+        await navigator.clipboard.writeText(snippet.value);
+        trackEvent('code_copied', { badge: badge.slug, label: badge.label, format: formatSelect.value });
+        showToast("Copied");
+      } catch (err) {
+        showToast("Copy failed", 2000);
+      }
+    });
+
+    copyImgBtn.addEventListener("click", async () => {
+      const badge = getSelectedBadge();
+      const pngUrl = withV(badge.png2x || `badges/png/2x/${badge.slug}.png`);
+      const fallbackOpen = () => {
+        window.open(pngUrl, "_blank", "noopener");
+        showToast("Clipboard blocked; opened image to copy manually", 2200);
+      };
+
+      if (!isSecureContext || typeof ClipboardItem === "undefined" || !navigator.clipboard?.write) {
+        fallbackOpen();
+        return;
+      }
+
+      try {
+        const res = await fetch(pngUrl);
+        if (!res.ok) throw new Error(`Image request failed: ${res.status}`);
+        const blob = await res.blob();
+        const item = new ClipboardItem({ [blob.type || 'image/png']: blob });
+        await navigator.clipboard.write([item]);
+        trackEvent('image_copied', { badge: badge.slug, label: badge.label, format: 'png' });
+        showToast("Badge image copied");
+      } catch (err) {
+        fallbackOpen();
+      }
+    });
+
+    copySvgBtn.addEventListener("click", async () => {
+      const badge = getSelectedBadge();
+      const svgUrl = withV(badge.path || `badges/svg/${badge.slug}.svg`);
+      const fallbackOpen = () => {
+        window.open(svgUrl, "_blank", "noopener");
+        showToast("Clipboard blocked; opened SVG to copy manually", 2200);
+      };
+
+      if (!isSecureContext || typeof ClipboardItem === "undefined" || !navigator.clipboard?.write) {
+        fallbackOpen();
+        return;
+      }
+
+      try {
+        const res = await fetch(svgUrl);
+        if (!res.ok) throw new Error(`SVG request failed: ${res.status}`);
+        const blob = await res.blob();
+        const item = new ClipboardItem({ [blob.type || 'image/svg+xml']: blob });
+        await navigator.clipboard.write([item]);
+        trackEvent('image_copied', { badge: badge.slug, label: badge.label, format: 'svg' });
+        showToast("Badge SVG copied");
+      } catch (err) {
+        fallbackOpen();
+      }
+    });
+
+    function showToast(message, duration = 1500) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), duration);
     }
-  });
 
-  function showToast(message, duration = 1500) {
-    toast.textContent = message;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), duration);
-  }
-
-  updateUsageCounter();
-  loadBadges();
-</script>
+    updateUsageCounter();
+    loadBadges();
+  </script>
+</body>
 </html>
