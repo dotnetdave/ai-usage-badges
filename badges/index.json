@@ -2,48 +2,84 @@
   "badges": [
     {
       "label": "Human Original",
+      "description": "Created without AI assistance.",
       "slug": "human-original",
-      "path": "badges/svg/human-original.svg"
+      "path": "badges/svg/human-original.svg",
+      "svg": "badges/svg/human-original.svg",
+      "png1x": "badges/png/1x/human-original.png",
+      "png2x": "badges/png/2x/human-original.png"
     },
     {
-      "label": "Human Original \u2022 AI Polished",
+      "label": "Human Original • AI Polished",
+      "description": "Human wrote it. AI only refined grammar, tone, or clarity.",
       "slug": "human-original-ai-polished",
-      "path": "badges/svg/human-original-ai-polished.svg"
+      "path": "badges/svg/human-original-ai-polished.svg",
+      "svg": "badges/svg/human-original-ai-polished.svg",
+      "png1x": "badges/png/1x/human-original-ai-polished.png",
+      "png2x": "badges/png/2x/human-original-ai-polished.png"
     },
     {
-      "label": "Human Written \u2022 AI Reviewed",
+      "label": "Human Written • AI Reviewed",
+      "description": "Human authored it. AI was used for review or quality checks only.",
       "slug": "human-written-ai-reviewed",
-      "path": "badges/svg/human-written-ai-reviewed.svg"
+      "path": "badges/svg/human-written-ai-reviewed.svg",
+      "svg": "badges/svg/human-written-ai-reviewed.svg",
+      "png1x": "badges/png/1x/human-written-ai-reviewed.png",
+      "png2x": "badges/png/2x/human-written-ai-reviewed.png"
     },
     {
-      "label": "AI Suggested \u2022 Human Approved",
+      "label": "AI Suggested • Human Approved",
+      "description": "AI proposed options. A human selected and lightly adjusted them.",
       "slug": "ai-suggested-human-approved",
-      "path": "badges/svg/ai-suggested-human-approved.svg"
+      "path": "badges/svg/ai-suggested-human-approved.svg",
+      "svg": "badges/svg/ai-suggested-human-approved.svg",
+      "png1x": "badges/png/1x/ai-suggested-human-approved.png",
+      "png2x": "badges/png/2x/ai-suggested-human-approved.png"
     },
     {
       "label": "Human Curated",
+      "description": "Human selected, arranged, or evaluated AI outputs from multiple candidates.",
       "slug": "human-curated",
-      "path": "badges/svg/human-curated.svg"
+      "path": "badges/svg/human-curated.svg",
+      "svg": "badges/svg/human-curated.svg",
+      "png1x": "badges/png/1x/human-curated.png",
+      "png2x": "badges/png/2x/human-curated.png"
     },
     {
-      "label": "Human\u2013AI Co-Created",
+      "label": "Human–AI Co-Created",
+      "description": "Human and AI collaborated iteratively on ideas, structure, and wording.",
       "slug": "human-ai-co-created",
-      "path": "badges/svg/human-ai-co-created.svg"
+      "path": "badges/svg/human-ai-co-created.svg",
+      "svg": "badges/svg/human-ai-co-created.svg",
+      "png1x": "badges/png/1x/human-ai-co-created.png",
+      "png2x": "badges/png/2x/human-ai-co-created.png"
     },
     {
-      "label": "AI Drafted \u2022 Human Edited",
+      "label": "AI Drafted • Human Edited",
+      "description": "AI produced the first draft. A human substantively edited or fact-checked it.",
       "slug": "ai-drafted-human-edited",
-      "path": "badges/svg/ai-drafted-human-edited.svg"
+      "path": "badges/svg/ai-drafted-human-edited.svg",
+      "svg": "badges/svg/ai-drafted-human-edited.svg",
+      "png1x": "badges/png/1x/ai-drafted-human-edited.png",
+      "png2x": "badges/png/2x/ai-drafted-human-edited.png"
     },
     {
       "label": "AI Drafted",
+      "description": "AI produced the first draft with minimal human edits.",
       "slug": "ai-drafted",
-      "path": "badges/svg/ai-drafted.svg"
+      "path": "badges/svg/ai-drafted.svg",
+      "svg": "badges/svg/ai-drafted.svg",
+      "png1x": "badges/png/1x/ai-drafted.png",
+      "png2x": "badges/png/2x/ai-drafted.png"
     },
     {
       "label": "AI Generated",
+      "description": "AI produced the final artifact with no meaningful human edits.",
       "slug": "ai-generated",
-      "path": "badges/svg/ai-generated.svg"
+      "path": "badges/svg/ai-generated.svg",
+      "svg": "badges/svg/ai-generated.svg",
+      "png1x": "badges/png/1x/ai-generated.png",
+      "png2x": "badges/png/2x/ai-generated.png"
     }
   ]
 }
