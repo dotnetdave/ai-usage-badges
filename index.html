@@ -76,7 +76,7 @@
       font-size: 18px;
     }
     .muted { color: var(--muted); }
-    ul { margin: 8px 0 0 18px; padding: 0; line-height: 1.5; }
+    ul, ol { margin: 8px 0 0 18px; padding: 0; line-height: 1.5; }
     code, pre {
       font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       background: rgba(255,255,255,0.04);
@@ -198,41 +198,12 @@
     }
   </style>
 
-  <!--
-    ANALYTICS SETUP (Optional)
-    The page tracks badge usage via trackEvent() function. To collect data:
-
-    Option 1: Google Analytics
-    Add before </head>:
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-
-    Option 2: Plausible Analytics
-    Add before </head>:
-    <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
-
-    Option 3: View local stats
-    Open browser console and run: getBadgeStats()
-
-    Events tracked:
-    - badge_selected: When user picks a badge
-    - format_changed: When user changes format (SVG, PNG, etc.)
-    - code_copied: When user copies embed code
-    - image_copied: When user copies badge image (PNG or SVG)
-  -->
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HVPN511EK"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-8HVPN511EK');
   </script>
 </head>
@@ -241,7 +212,7 @@
     <header>
       <h1>AI Attribution Badges</h1>
       <p style="font-size: 18px; line-height: 1.5; margin: 12px 0 8px; color: #e2e8f0;">
-        Show stakeholders and teammates exactly how AI was involved in your work—without awkward disclaimers or trust gaps.
+        Show stakeholders and teammates exactly how AI was involved in your work without awkward disclaimers or trust gaps.
       </p>
       <p class="muted" style="font-size: 15px;">
         Drop a badge in your email, deck, or brief. Takes 30 seconds. Free forever. Used by marketing teams to build transparency.
@@ -286,7 +257,7 @@
         </div>
         <div class="card">
           <h3>Process, Not Ownership</h3>
-          <p class="muted">These badges describe how the work was created—not who owns it or who's responsible. Just transparency about the process.</p>
+          <p class="muted">These badges describe how the work was created, not who owns it or who's responsible. Just transparency about the process.</p>
         </div>
         <div class="card">
           <h3>Instant Context</h3>
@@ -332,7 +303,7 @@
         <div class="card">
           <h3 style="margin-bottom: 12px;">Quick Guidelines</h3>
           <ul style="margin: 0; padding-left: 18px; line-height: 1.7;">
-            <li>One badge per artifact (email, deck, doc, FAQ)</li>
+            <li>One badge per artifact, such as email, deck, doc, or FAQ</li>
             <li>Choose the highest AI involvement that occurred</li>
             <li>When unsure, use <strong>Human–AI Co-Created</strong></li>
             <li>Place where people see it first</li>
@@ -346,79 +317,33 @@
             <li>Slides: title slide or footer</li>
             <li>Documents: cover page or header</li>
             <li>Always include alt text for accessibility</li>
-            <li>Use SVG for web, PNG for email/slides</li>
+            <li>Use SVG for web, PNG for email and slides</li>
           </ul>
         </div>
       </div>
     </section>
 
     <section>
-      <h2 class="section-title">Badges</h2>
+      <h2 class="section-title">Which Badge Should I Use?</h2>
       <div class="grid">
-        <div class="badge-row">
-          <img src="badges/svg/human-original.svg?v=v2" alt="Human Original badge">
-          <div>
-            <p class="badge-title">Human Original</p>
-            <p class="badge-copy">Created without AI assistance.</p>
-          </div>
+        <div class="card">
+          <h3>No AI wrote content</h3>
+          <p class="muted">Use <strong>Human Original</strong>, <strong>Human Original • AI Polished</strong>, or <strong>Human Written • AI Reviewed</strong>.</p>
         </div>
-        <div class="badge-row">
-          <img src="badges/svg/human-original-ai-polished.svg?v=v2" alt="Human Original • AI Polished badge">
-          <div>
-            <p class="badge-title">Human Original • AI Polished</p>
-            <p class="badge-copy">Human wrote it AI only refinished (grammar tone tightening).</p>
-          </div>
+        <div class="card">
+          <h3>AI helped generate options</h3>
+          <p class="muted">Use <strong>AI Suggested • Human Approved</strong> or <strong>Human Curated</strong> when a human selected and shaped the final result.</p>
         </div>
-        <div class="badge-row">
-          <img src="badges/svg/human-written-ai-reviewed.svg?v=v2" alt="Human Written • AI Reviewed badge">
-          <div>
-            <p class="badge-title">Human Written • AI Reviewed</p>
-            <p class="badge-copy">Human authored AI used for review or quality checks only.</p>
-          </div>
-        </div>
-        <div class="badge-row">
-          <img src="badges/svg/ai-suggested-human-approved.svg?v=v2" alt="AI Suggested • Human Approved badge">
-          <div>
-            <p class="badge-title">AI Suggested • Human Approved</p>
-            <p class="badge-copy">AI proposed options human selected and lightly adjusted.</p>
-          </div>
-        </div>
-        <div class="badge-row">
-          <img src="badges/svg/human-curated.svg?v=v2" alt="Human Curated badge">
-          <div>
-            <p class="badge-title">Human Curated</p>
-            <p class="badge-copy">Human selected or arranged AI outputs from multiple candidates.</p>
-          </div>
-        </div>
-        <div class="badge-row">
-          <img src="badges/svg/human-ai-co-created.svg?v=v2" alt="Human–AI Co-Created badge">
-          <div>
-            <p class="badge-title">Human–AI Co-Created</p>
-            <p class="badge-copy">Human and AI collaborated iteratively shared authorship of ideas and wording.</p>
-          </div>
-        </div>
-        <div class="badge-row">
-          <img src="badges/svg/ai-drafted-human-edited.svg?v=v2" alt="AI Drafted • Human Edited badge">
-          <div>
-            <p class="badge-title">AI Drafted • Human Edited</p>
-            <p class="badge-copy">AI first draft then substantive human rewriting or fact-checking.</p>
-          </div>
-        </div>
-        <div class="badge-row">
-          <img src="badges/svg/ai-drafted.svg?v=v2" alt="AI Drafted badge">
-          <div>
-            <p class="badge-title">AI Drafted</p>
-            <p class="badge-copy">AI produced the first draft; minimal human edits.</p>
-          </div>
-        </div>
-        <div class="badge-row">
-          <img src="badges/svg/ai-generated.svg?v=v2" alt="AI Generated badge">
-          <div>
-            <p class="badge-title">AI Generated</p>
-            <p class="badge-copy">AI produced the final artifact with no meaningful human edits.</p>
-          </div>
+        <div class="card">
+          <h3>AI wrote meaningful text</h3>
+          <p class="muted">Use <strong>Human–AI Co-Created</strong>, <strong>AI Drafted • Human Edited</strong>, <strong>AI Drafted</strong>, or <strong>AI Generated</strong>.</p>
         </div>
       </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Badges</h2>
+      <div class="grid" id="badgeGrid"></div>
     </section>
 
     <section id="embed">
@@ -433,11 +358,11 @@
           <div>
             <label for="formatSelect">Format</label>
             <select id="formatSelect">
-              <option value="email">Email footer (SVG)</option>
+              <option value="email">Email footer (PNG, safest)</option>
               <option value="svg-md">Markdown (SVG)</option>
               <option value="svg-html">HTML IMG (SVG)</option>
               <option value="png1-html">HTML IMG (PNG 1x)</option>
-              <option value="png2-html">HTML IMG (PNG 2x)</option>
+              <option value="png2-html">HTML IMG (PNG 2x, render at 20px)</option>
               <option value="sprite">SVG Sprite &lt;use&gt;</option>
             </select>
           </div>
@@ -460,56 +385,181 @@
         </div>
       </div>
 
-    <div class="card" style="margin-bottom:18px;">
-      <h3>How to add to Outlook (Windows desktop)</h3>
-      <ol style="margin: 8px 0 0 18px; padding: 0; line-height: 1.5; color: var(--muted);">
-        <li>Pick the badge and format above, choose “Email footer (SVG)”, then click Copy.</li>
-        <li>In Outlook: File → Options → Mail → Signatures → Edit your signature.</li>
-        <li>Place the cursor where you want the badge, choose Insert Picture, and paste the copied HTML (Ctrl+V).</li>
-        <li>If Outlook strips HTML, paste into the signature editor’s HTML view (or Insert &gt; Picture from Clipboard).</li>
-        <li>Click OK to save. Send yourself a test email to verify the badge renders and the alt text reads correctly when images are blocked.</li>
-      </ol>
-    </div>
-
-      <!-- Additional examples removed to keep the embed section focused on the picker -->
+      <div class="card" style="margin-bottom:18px;">
+        <h3>How to add to Outlook (Windows desktop)</h3>
+        <ol style="margin: 8px 0 0 18px; padding: 0; line-height: 1.5; color: var(--muted);">
+          <li>Pick the badge and format above, choose “Email footer (PNG, safest)”, then click Copy.</li>
+          <li>In Outlook: File → Options → Mail → Signatures → Edit your signature.</li>
+          <li>Place the cursor where you want the badge and paste the copied footer.</li>
+          <li>If Outlook blocks the footer HTML, click “Copy badge PNG” and insert the image manually.</li>
+          <li>Send yourself a test email to verify the badge renders and the alt text is useful when images are blocked.</li>
+        </ol>
+      </div>
     </section>
   </div>
 </body>
 <script>
-  const ASSET_VERSION = "v4";
-  const badges = [
-    { slug: "human-original", label: "Human Original" },
-    { slug: "human-original-ai-polished", label: "Human Original • AI Polished" },
-    { slug: "human-written-ai-reviewed", label: "Human Written • AI Reviewed" },
-    { slug: "ai-suggested-human-approved", label: "AI Suggested • Human Approved" },
-    { slug: "human-curated", label: "Human Curated" },
-    { slug: "human-ai-co-created", label: "Human–AI Co-Created" },
-    { slug: "ai-drafted-human-edited", label: "AI Drafted • Human Edited" },
-    { slug: "ai-drafted", label: "AI Drafted" },
-    { slug: "ai-generated", label: "AI Generated" },
+  const ASSET_VERSION = "v5";
+  const TOTAL_BADGE_USES = 45;
+  const ANALYTICS_API_ENDPOINT = '/api/badge-count';
+
+  const BADGE_FALLBACKS = [
+    { slug: "human-original", label: "Human Original", description: "Created without AI assistance.", path: "badges/svg/human-original.svg", png1x: "badges/png/1x/human-original.png", png2x: "badges/png/2x/human-original.png" },
+    { slug: "human-original-ai-polished", label: "Human Original • AI Polished", description: "Human wrote it. AI only refined grammar, tone, or clarity.", path: "badges/svg/human-original-ai-polished.svg", png1x: "badges/png/1x/human-original-ai-polished.png", png2x: "badges/png/2x/human-original-ai-polished.png" },
+    { slug: "human-written-ai-reviewed", label: "Human Written • AI Reviewed", description: "Human authored it. AI was used for review or quality checks only.", path: "badges/svg/human-written-ai-reviewed.svg", png1x: "badges/png/1x/human-written-ai-reviewed.png", png2x: "badges/png/2x/human-written-ai-reviewed.png" },
+    { slug: "ai-suggested-human-approved", label: "AI Suggested • Human Approved", description: "AI proposed options. A human selected and lightly adjusted them.", path: "badges/svg/ai-suggested-human-approved.svg", png1x: "badges/png/1x/ai-suggested-human-approved.png", png2x: "badges/png/2x/ai-suggested-human-approved.png" },
+    { slug: "human-curated", label: "Human Curated", description: "Human selected, arranged, or evaluated AI outputs from multiple candidates.", path: "badges/svg/human-curated.svg", png1x: "badges/png/1x/human-curated.png", png2x: "badges/png/2x/human-curated.png" },
+    { slug: "human-ai-co-created", label: "Human–AI Co-Created", description: "Human and AI collaborated iteratively on ideas, structure, and wording.", path: "badges/svg/human-ai-co-created.svg", png1x: "badges/png/1x/human-ai-co-created.png", png2x: "badges/png/2x/human-ai-co-created.png" },
+    { slug: "ai-drafted-human-edited", label: "AI Drafted • Human Edited", description: "AI produced the first draft. A human substantively edited or fact-checked it.", path: "badges/svg/ai-drafted-human-edited.svg", png1x: "badges/png/1x/ai-drafted-human-edited.png", png2x: "badges/png/2x/ai-drafted-human-edited.png" },
+    { slug: "ai-drafted", label: "AI Drafted", description: "AI produced the first draft with minimal human edits.", path: "badges/svg/ai-drafted.svg", png1x: "badges/png/1x/ai-drafted.png", png2x: "badges/png/2x/ai-drafted.png" },
+    { slug: "ai-generated", label: "AI Generated", description: "AI produced the final artifact with no meaningful human edits.", path: "badges/svg/ai-generated.svg", png1x: "badges/png/1x/ai-generated.png", png2x: "badges/png/2x/ai-generated.png" }
   ];
 
-  // ============================================================================
-  // USAGE TRACKING
-  // Tracks badge selection, format changes, and copy actions to understand
-  // which badges are most popular. Works with Google Analytics, Plausible,
-  // or stores data locally. View stats in console: getBadgeStats()
-  // ============================================================================
+  let badges = [...BADGE_FALLBACKS];
+
+  const badgeSelect = document.getElementById("badgeSelect");
+  const formatSelect = document.getElementById("formatSelect");
+  const preview = document.getElementById("badgePreview");
+  const snippet = document.getElementById("snippet");
+  const toast = document.getElementById("toast");
+  const copyBtn = document.getElementById("copyBtn");
+  const copyImgBtn = document.getElementById("copyImgBtn");
+  const copySvgBtn = document.getElementById("copySvgBtn");
+  const badgeGrid = document.getElementById("badgeGrid");
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function withV(path) {
+    const url = new URL(path, window.location.href);
+    url.searchParams.set("v", ASSET_VERSION);
+    return url.href;
+  }
+
+  async function loadBadges() {
+    try {
+      const response = await fetch(withV("badges/index.json"), {
+        method: "GET",
+        headers: { "Accept": "application/json" },
+        cache: "no-cache"
+      });
+      if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
+      const data = await response.json();
+      if (Array.isArray(data.badges) && data.badges.length > 0) {
+        badges = data.badges.map(badge => ({
+          ...badge,
+          path: badge.path || badge.svg || `badges/svg/${badge.slug}.svg`,
+          png1x: badge.png1x || `badges/png/1x/${badge.slug}.png`,
+          png2x: badge.png2x || `badges/png/2x/${badge.slug}.png`,
+          description: badge.description || "AI usage disclosure badge."
+        }));
+      }
+    } catch (error) {
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.warn('[Badges] Using fallback badge manifest:', error.message);
+      }
+    }
+
+    renderBadgeGrid();
+    populateBadgeSelect();
+    badgeSelect.value = badges[0]?.slug || "";
+    updateUI();
+  }
+
+  function renderBadgeGrid() {
+    badgeGrid.innerHTML = badges.map(badge => `
+      <div class="badge-row">
+        <img src="${withV(badge.path)}" alt="${escapeHtml(badge.label)} badge">
+        <div>
+          <p class="badge-title">${escapeHtml(badge.label)}</p>
+          <p class="badge-copy">${escapeHtml(badge.description)}</p>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function populateBadgeSelect() {
+    badgeSelect.innerHTML = "";
+    badges.forEach(badge => {
+      const opt = document.createElement("option");
+      opt.value = badge.slug;
+      opt.textContent = badge.label;
+      badgeSelect.appendChild(opt);
+    });
+  }
+
+  function formatMagnitude(num) {
+    if (num < 1000) return num.toString();
+    if (num < 10000) return (num / 1000).toFixed(1).replace('.0', '') + 'k';
+    if (num < 1000000) return Math.floor(num / 1000) + 'k';
+    if (num < 10000000) return (num / 1000000).toFixed(1).replace('.0', '') + 'M';
+    if (num < 1000000000) return Math.floor(num / 1000000) + 'M';
+    return (num / 1000000000).toFixed(1).replace('.0', '') + 'B';
+  }
+
+  async function updateUsageCounter() {
+    const counterEl = document.getElementById('usageCount');
+    if (!counterEl) return;
+
+    let totalUses = TOTAL_BADGE_USES;
+
+    try {
+      const response = await fetch(ANALYTICS_API_ENDPOINT, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+        cache: 'no-cache'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const count = Number(data.count);
+        if (Number.isFinite(count)) {
+          totalUses = count;
+          if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log('[Analytics] Live count fetched:', totalUses);
+          }
+        }
+      } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.warn('[Analytics] API returned error:', response.status);
+      }
+    } catch (error) {
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.warn('[Analytics] Failed to fetch live count, using fallback:', error.message);
+      }
+    }
+
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      try {
+        const localStats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
+        const localCount = Object.keys(localStats)
+          .filter(k => k.startsWith('code_copied_') || k.startsWith('image_copied_'))
+          .reduce((sum, key) => sum + (localStats[key] || 0), 0);
+        totalUses += localCount;
+      } catch (e) {
+        // Ignore localStorage errors.
+      }
+    }
+
+    counterEl.textContent = formatMagnitude(totalUses);
+  }
 
   function trackEvent(action, properties = {}) {
-    // Google Analytics (gtag.js)
     if (typeof gtag !== 'undefined') {
       gtag('event', action, properties);
     }
-    // Plausible Analytics
     if (typeof plausible !== 'undefined') {
       plausible(action, { props: properties });
     }
-    // Console logging for development
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       console.log('[Analytics]', action, properties);
     }
-    // Store locally for usage statistics
+
     try {
       const stats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
       const key = `${action}_${properties.badge || 'unknown'}`;
@@ -517,17 +567,14 @@
       stats.lastTracked = new Date().toISOString();
       localStorage.setItem('badge-stats', JSON.stringify(stats));
 
-      // Update counter for copy actions (in dev/demo mode)
-      if ((action === 'code_copied' || action === 'image_copied') &&
-          (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      if (action === 'code_copied' || action === 'image_copied') {
         updateUsageCounter();
       }
     } catch (e) {
-      // Silent fail if localStorage unavailable
+      // Silent fail if localStorage is unavailable.
     }
   }
 
-  // Helper function to view collected badge usage stats (call from console)
   window.getBadgeStats = function() {
     try {
       const stats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
@@ -539,112 +586,16 @@
     }
   };
 
-  // ============================================================================
-  // USAGE COUNTER
-  // Displays total badge uses with magnitude formatting (1k, 10k, 100k, 1M+)
-  // Fetches live count from Google Analytics API via backend proxy
-  // Falls back to TOTAL_BADGE_USES if API unavailable
-  // ============================================================================
-
-  const TOTAL_BADGE_USES = 45; // Fallback value if API unavailable
-  const ANALYTICS_API_ENDPOINT = '/api/badge-count'; // Update with your API endpoint URL
-
-  function formatMagnitude(num) {
-    if (num < 1000) {
-      return num.toString();
-    } else if (num < 10000) {
-      // 1k - 9.9k (show decimal for 1k-9k range)
-      return (num / 1000).toFixed(1).replace('.0', '') + 'k';
-    } else if (num < 1000000) {
-      // 10k - 999k (no decimal)
-      return Math.floor(num / 1000) + 'k';
-    } else if (num < 10000000) {
-      // 1M - 9.9M (show decimal)
-      return (num / 1000000).toFixed(1).replace('.0', '') + 'M';
-    } else if (num < 1000000000) {
-      // 10M - 999M (no decimal)
-      return Math.floor(num / 1000000) + 'M';
-    } else {
-      // 1B+ (show decimal)
-      return (num / 1000000000).toFixed(1).replace('.0', '') + 'B';
-    }
+  function getSelectedBadge() {
+    return badges.find(badge => badge.slug === badgeSelect.value) || badges[0];
   }
 
-  async function updateUsageCounter() {
-    const counterEl = document.getElementById('usageCount');
-    if (!counterEl) return;
-
-    let totalUses = TOTAL_BADGE_USES; // Start with fallback
-
-    // Try to fetch live count from Google Analytics API
-    try {
-      const response = await fetch(ANALYTICS_API_ENDPOINT, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json' },
-        cache: 'no-cache'
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        // API should return: { count: 12345, timestamp: "2024-01-31T..." }
-        if (data.count && typeof data.count === 'number') {
-          totalUses = data.count;
-          console.log('[Analytics] Live count fetched:', totalUses);
-        }
-      } else {
-        console.warn('[Analytics] API returned error:', response.status);
-      }
-    } catch (error) {
-      console.warn('[Analytics] Failed to fetch live count, using fallback:', error.message);
-    }
-
-    // Optionally add local session count for demonstration in dev
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      try {
-        const localStats = JSON.parse(localStorage.getItem('badge-stats') || '{}');
-        const localCount = Object.keys(localStats)
-          .filter(k => k.startsWith('code_copied_') || k.startsWith('image_copied_'))
-          .reduce((sum, key) => sum + (localStats[key] || 0), 0);
-        totalUses += localCount;
-        console.log('[Analytics] Added local count:', localCount);
-      } catch (e) {
-        // Ignore localStorage errors
-      }
-    }
-
-    counterEl.textContent = formatMagnitude(totalUses);
-  }
-
-  // Update counter on page load
-  updateUsageCounter();
-
-  const badgeSelect = document.getElementById("badgeSelect");
-  const formatSelect = document.getElementById("formatSelect");
-  const preview = document.getElementById("badgePreview");
-  const snippet = document.getElementById("snippet");
-  const toast = document.getElementById("toast");
-  const copyBtn = document.getElementById("copyBtn");
-  const copyImgBtn = document.getElementById("copyImgBtn");
-  const copySvgBtn = document.getElementById("copySvgBtn");
-
-  badges.forEach(b => {
-    const opt = document.createElement("option");
-    opt.value = b.slug;
-    opt.textContent = b.label;
-    badgeSelect.appendChild(opt);
-  });
-
-  function withV(path) {
-    const url = new URL(path, window.location.href);
-    url.searchParams.set("v", ASSET_VERSION);
-    return url.href;
-  }
-
-  function buildSnippet(slug, label, fmt) {
-    const svgUrl = withV(`badges/svg/${slug}.svg`);
-    const png1 = withV(`badges/png/1x/${slug}.png`);
-    const png2 = withV(`badges/png/2x/${slug}.png`);
-    const sprite = withV(`sprites/sprite.svg#${slug}`);
+  function buildSnippet(badge, fmt) {
+    const svgUrl = withV(badge.path || `badges/svg/${badge.slug}.svg`);
+    const png1 = withV(badge.png1x || `badges/png/1x/${badge.slug}.png`);
+    const png2 = withV(badge.png2x || `badges/png/2x/${badge.slug}.png`);
+    const sprite = withV(`sprites/sprite.svg#${badge.slug}`);
+    const label = badge.label;
 
     switch (fmt) {
       case "svg-md":
@@ -654,11 +605,11 @@
       case "png1-html":
         return `<img src="${png1}" alt="${label}" height="20">`;
       case "png2-html":
-        return `<img src="${png2}" alt="${label}" height="40">`;
+        return `<img src="${png2}" alt="${label}" height="20">`;
       case "email":
         return `<div style="font-family:'Segoe UI',Arial,sans-serif;font-size:13px;line-height:18px;">
   <strong>AI Disclosure:</strong><br>
-  <img src="${svgUrl}" alt="${label}" height="20" style="vertical-align:middle;border:none;">
+  <img src="${png2}" alt="${label}" height="20" style="height:20px;width:auto;vertical-align:middle;border:none;">
 </div>`;
       case "sprite":
         return `<svg role="img" aria-label="${label}" height="20">
@@ -670,58 +621,44 @@
   }
 
   function updateUI() {
-    const slug = badgeSelect.value;
+    const badge = getSelectedBadge();
+    if (!badge) return;
     const fmt = formatSelect.value;
-    const label = badges.find(b => b.slug === slug)?.label ?? "";
 
-    // Preview prefers SVG for crispness
-    preview.src = withV(`badges/svg/${slug}.svg`);
-    preview.alt = label;
-
-    snippet.value = buildSnippet(slug, label, fmt);
+    preview.src = withV(badge.path || `badges/svg/${badge.slug}.svg`);
+    preview.alt = badge.label;
+    snippet.value = buildSnippet(badge, fmt);
   }
 
   badgeSelect.addEventListener("change", () => {
-    const slug = badgeSelect.value;
-    const label = badges.find(b => b.slug === slug)?.label ?? "";
-    trackEvent('badge_selected', { badge: slug, label: label });
+    const badge = getSelectedBadge();
+    trackEvent('badge_selected', { badge: badge.slug, label: badge.label });
     updateUI();
   });
 
   formatSelect.addEventListener("change", () => {
-    const slug = badgeSelect.value;
-    const fmt = formatSelect.value;
-    trackEvent('format_changed', { badge: slug, format: fmt });
+    const badge = getSelectedBadge();
+    trackEvent('format_changed', { badge: badge.slug, format: formatSelect.value });
     updateUI();
   });
 
   copyBtn.addEventListener("click", async () => {
-    const slug = badgeSelect.value;
-    const fmt = formatSelect.value;
-    const label = badges.find(b => b.slug === slug)?.label ?? "";
-
+    const badge = getSelectedBadge();
     try {
       await navigator.clipboard.writeText(snippet.value);
-      trackEvent('code_copied', { badge: slug, label: label, format: fmt });
-      toast.textContent = "Copied";
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1500);
+      trackEvent('code_copied', { badge: badge.slug, label: badge.label, format: formatSelect.value });
+      showToast("Copied");
     } catch (err) {
-      toast.textContent = "Copy failed";
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 2000);
+      showToast("Copy failed", 2000);
     }
   });
 
   copyImgBtn.addEventListener("click", async () => {
-    const slug = badgeSelect.value;
-    const label = badges.find(b => b.slug === slug)?.label ?? "AI badge";
-    const pngUrl = withV(`badges/png/2x/${slug}.png`);
+    const badge = getSelectedBadge();
+    const pngUrl = withV(badge.png2x || `badges/png/2x/${badge.slug}.png`);
     const fallbackOpen = () => {
       window.open(pngUrl, "_blank", "noopener");
-      toast.textContent = "Clipboard blocked; opened image to copy manually";
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 2200);
+      showToast("Clipboard blocked; opened image to copy manually", 2200);
     };
 
     if (!isSecureContext || typeof ClipboardItem === "undefined" || !navigator.clipboard?.write) {
@@ -731,27 +668,23 @@
 
     try {
       const res = await fetch(pngUrl);
+      if (!res.ok) throw new Error(`Image request failed: ${res.status}`);
       const blob = await res.blob();
-      const item = new ClipboardItem({ [blob.type]: blob });
+      const item = new ClipboardItem({ [blob.type || 'image/png']: blob });
       await navigator.clipboard.write([item]);
-      trackEvent('image_copied', { badge: slug, label: label, format: 'png' });
-      toast.textContent = "Badge image copied";
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1500);
+      trackEvent('image_copied', { badge: badge.slug, label: badge.label, format: 'png' });
+      showToast("Badge image copied");
     } catch (err) {
       fallbackOpen();
     }
   });
 
   copySvgBtn.addEventListener("click", async () => {
-    const slug = badgeSelect.value;
-    const label = badges.find(b => b.slug === slug)?.label ?? "AI badge";
-    const svgUrl = withV(`badges/svg/${slug}.svg`);
+    const badge = getSelectedBadge();
+    const svgUrl = withV(badge.path || `badges/svg/${badge.slug}.svg`);
     const fallbackOpen = () => {
       window.open(svgUrl, "_blank", "noopener");
-      toast.textContent = "Clipboard blocked; opened SVG to copy manually";
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 2200);
+      showToast("Clipboard blocked; opened SVG to copy manually", 2200);
     };
 
     if (!isSecureContext || typeof ClipboardItem === "undefined" || !navigator.clipboard?.write) {
@@ -761,20 +694,24 @@
 
     try {
       const res = await fetch(svgUrl);
+      if (!res.ok) throw new Error(`SVG request failed: ${res.status}`);
       const blob = await res.blob();
-      const item = new ClipboardItem({ [blob.type]: blob });
+      const item = new ClipboardItem({ [blob.type || 'image/svg+xml']: blob });
       await navigator.clipboard.write([item]);
-      trackEvent('image_copied', { badge: slug, label: label, format: 'svg' });
-      toast.textContent = "Badge SVG copied";
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1500);
+      trackEvent('image_copied', { badge: badge.slug, label: badge.label, format: 'svg' });
+      showToast("Badge SVG copied");
     } catch (err) {
       fallbackOpen();
     }
   });
 
-  // Initialize defaults
-  badgeSelect.value = badges[0].slug;
-  updateUI();
+  function showToast(message, duration = 1500) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), duration);
+  }
+
+  updateUsageCounter();
+  loadBadges();
 </script>
 </html>
